@@ -24,11 +24,11 @@ namespace WWRK
             db_connection.Open();
             OleDbCommand select = new OleDbCommand();
             select.Connection = db_connection;
-            select.CommandText = "Select * From Adressen Where ??? = ' '";
+            select.CommandText = "Select * From Adressen = ' '";
             OleDbDataReader reader = select.ExecuteReader();
             while (reader != null && reader.Read())
             {
-                lstBox_Questions.Items.Add(reader[1].ToString() + "," + reader[2].ToString());
+                lstBox_Questions.Items.Add(reader[1] + "," + reader[2]);
             }
             db_connection.Close();
         }
