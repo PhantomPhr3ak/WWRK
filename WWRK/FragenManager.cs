@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.OleDb;
+using System.Windows.Forms;
 
 namespace WWRK
 {
@@ -16,14 +17,34 @@ namespace WWRK
 
 
         //Fragen und Antworten
-        private Frage[] FragenTeam1 = new Frage[5];
-        private Frage[] FragenTeam2 = new Frage[5];
+        private Frage[] fragenTeam1 = new Frage[5];
+        private Frage[] fragenTeam2 = new Frage[5];
 
         Random der_Zufall = new Random();
 
         private int aktuellTeam1;
         private int aktuellTeam2;
 
-        
+        private Form1 form;
+
+        FragenManager(Form1 _form)
+        {
+            form = _form;
+        }
+
+        public void FragenAuswählen()
+        {
+            
+        }
+
+        public void NächsteFrage()
+        {
+            
+        }
+
+        public void AntwortBestätigen(string ausgewählteAntwort);
+        {
+            
+        }
     }
 }
