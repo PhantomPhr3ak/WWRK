@@ -12,10 +12,16 @@ namespace WWRK
 {
     public partial class Form1 : Form
     {
+        readonly FragenManagerForm _fragenManager = new FragenManagerForm();
+        
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void btnFragenManager_Click(object sender, EventArgs e)
+        {
+            _fragenManager.Show();
+        }
     }
 }
