@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,19 @@ namespace WWRK
             InitializeComponent();
         }
 
-        private void FragenManagerForm_Load(object sender, EventArgs e)
+    private void FragenManagerForm_Load(object sender, EventArgs e)
         {
-
+            OleDbConnection db_connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=c:\bin\Addressen.mdb");
+            db_connection.Open();
+            OleDbCommand select = new OleDbCommand();
+            select.Connection = db_connection;
+            select.CommandText = "Select * From Adressen Where ??? = ' '";
+            OleDbDataReader reader = select.ExecuteReader();
+            while (reader != null && reader.Read())
+            {
+                lstBox_Questions.Items.Add(reader[1].ToString() + "," + reader[2].ToString());
+            }
+            db_connection.Close();
         }
 
         private void lstBox_Questions_SelectedIndexChanged(object sender, EventArgs e)
