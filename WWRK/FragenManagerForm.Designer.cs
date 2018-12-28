@@ -34,6 +34,7 @@
             this.txtBox_Answer2 = new System.Windows.Forms.TextBox();
             this.txtBox_Answer3 = new System.Windows.Forms.TextBox();
             this.btn_Save = new System.Windows.Forms.Button();
+            this.txtBox_Answer0 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lstBox_Questions
@@ -41,16 +42,16 @@
             this.lstBox_Questions.FormattingEnabled = true;
             this.lstBox_Questions.Location = new System.Drawing.Point(12, 12);
             this.lstBox_Questions.Name = "lstBox_Questions";
-            this.lstBox_Questions.Size = new System.Drawing.Size(828, 342);
+            this.lstBox_Questions.Size = new System.Drawing.Size(828, 316);
             this.lstBox_Questions.TabIndex = 0;
             this.lstBox_Questions.SelectedIndexChanged += new System.EventHandler(this.lstBox_Questions_SelectedIndexChanged);
             // 
             // txtBox_Question
             // 
-            this.txtBox_Question.Location = new System.Drawing.Point(12, 358);
+            this.txtBox_Question.Location = new System.Drawing.Point(11, 334);
             this.txtBox_Question.Name = "txtBox_Question";
             this.txtBox_Question.ReadOnly = true;
-            this.txtBox_Question.Size = new System.Drawing.Size(209, 20);
+            this.txtBox_Question.Size = new System.Drawing.Size(829, 20);
             this.txtBox_Question.TabIndex = 1;
             // 
             // txtBox_Answer1
@@ -87,11 +88,20 @@
             this.btn_Save.UseVisualStyleBackColor = true;
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
+            // txtBox_Answer0
+            // 
+            this.txtBox_Answer0.Location = new System.Drawing.Point(12, 358);
+            this.txtBox_Answer0.Name = "txtBox_Answer0";
+            this.txtBox_Answer0.ReadOnly = true;
+            this.txtBox_Answer0.Size = new System.Drawing.Size(209, 20);
+            this.txtBox_Answer0.TabIndex = 6;
+            // 
             // FragenManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 419);
+            this.Controls.Add(this.txtBox_Answer0);
             this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.txtBox_Answer3);
             this.Controls.Add(this.txtBox_Answer2);
@@ -118,5 +128,6 @@
         private System.Windows.Forms.TextBox txtBox_Answer2;
         private System.Windows.Forms.TextBox txtBox_Answer3;
         private System.Windows.Forms.Button btn_Save;
+        private System.Windows.Forms.TextBox txtBox_Answer0;
     }
 }

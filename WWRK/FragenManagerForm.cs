@@ -25,6 +25,7 @@ namespace WWRK
         private void lstBox_Questions_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtBox_Question.ReadOnly = false;
+            txtBox_Answer0.ReadOnly = false;
             txtBox_Answer1.ReadOnly = false;
             txtBox_Answer2.ReadOnly = false;
             txtBox_Answer3.ReadOnly = false;
