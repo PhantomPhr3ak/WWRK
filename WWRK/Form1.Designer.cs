@@ -53,7 +53,7 @@
             // btnAntwort1
             // 
             this.btnAntwort1.Location = new System.Drawing.Point(283, 172);
-            this.btnAntwort1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAntwort1.Margin = new System.Windows.Forms.Padding(2);
             this.btnAntwort1.Name = "btnAntwort1";
             this.btnAntwort1.Size = new System.Drawing.Size(152, 73);
             this.btnAntwort1.TabIndex = 0;
@@ -63,7 +63,7 @@
             // btnAntwort2
             // 
             this.btnAntwort2.Location = new System.Drawing.Point(439, 172);
-            this.btnAntwort2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAntwort2.Margin = new System.Windows.Forms.Padding(2);
             this.btnAntwort2.Name = "btnAntwort2";
             this.btnAntwort2.Size = new System.Drawing.Size(152, 73);
             this.btnAntwort2.TabIndex = 1;
@@ -73,7 +73,7 @@
             // btnAntwort3
             // 
             this.btnAntwort3.Location = new System.Drawing.Point(283, 249);
-            this.btnAntwort3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAntwort3.Margin = new System.Windows.Forms.Padding(2);
             this.btnAntwort3.Name = "btnAntwort3";
             this.btnAntwort3.Size = new System.Drawing.Size(152, 73);
             this.btnAntwort3.TabIndex = 2;
@@ -83,7 +83,7 @@
             // btnAntwort4
             // 
             this.btnAntwort4.Location = new System.Drawing.Point(439, 249);
-            this.btnAntwort4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAntwort4.Margin = new System.Windows.Forms.Padding(2);
             this.btnAntwort4.Name = "btnAntwort4";
             this.btnAntwort4.Size = new System.Drawing.Size(152, 73);
             this.btnAntwort4.TabIndex = 3;
@@ -93,7 +93,7 @@
             // btnAntwortBestätigen
             // 
             this.btnAntwortBestätigen.Location = new System.Drawing.Point(283, 343);
-            this.btnAntwortBestätigen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAntwortBestätigen.Margin = new System.Windows.Forms.Padding(2);
             this.btnAntwortBestätigen.Name = "btnAntwortBestätigen";
             this.btnAntwortBestätigen.Size = new System.Drawing.Size(152, 31);
             this.btnAntwortBestätigen.TabIndex = 4;
@@ -123,7 +123,8 @@
             // pbStatus
             // 
             this.pbStatus.Location = new System.Drawing.Point(283, 8);
-            this.pbStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pbStatus.Margin = new System.Windows.Forms.Padding(2);
+            this.pbStatus.Maximum = 10;
             this.pbStatus.Name = "pbStatus";
             this.pbStatus.Size = new System.Drawing.Size(307, 32);
             this.pbStatus.TabIndex = 7;
@@ -151,7 +152,7 @@
             // btnJoker1Team1
             // 
             this.btnJoker1Team1.Location = new System.Drawing.Point(61, 54);
-            this.btnJoker1Team1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnJoker1Team1.Margin = new System.Windows.Forms.Padding(2);
             this.btnJoker1Team1.Name = "btnJoker1Team1";
             this.btnJoker1Team1.Size = new System.Drawing.Size(143, 28);
             this.btnJoker1Team1.TabIndex = 10;
@@ -161,7 +162,7 @@
             // btnJoker2Team1
             // 
             this.btnJoker2Team1.Location = new System.Drawing.Point(61, 94);
-            this.btnJoker2Team1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnJoker2Team1.Margin = new System.Windows.Forms.Padding(2);
             this.btnJoker2Team1.Name = "btnJoker2Team1";
             this.btnJoker2Team1.Size = new System.Drawing.Size(143, 28);
             this.btnJoker2Team1.TabIndex = 11;
@@ -171,7 +172,7 @@
             // btnJoker1Team2
             // 
             this.btnJoker1Team2.Location = new System.Drawing.Point(647, 54);
-            this.btnJoker1Team2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnJoker1Team2.Margin = new System.Windows.Forms.Padding(2);
             this.btnJoker1Team2.Name = "btnJoker1Team2";
             this.btnJoker1Team2.Size = new System.Drawing.Size(143, 28);
             this.btnJoker1Team2.TabIndex = 12;
@@ -181,7 +182,7 @@
             // btnJoker2Team2
             // 
             this.btnJoker2Team2.Location = new System.Drawing.Point(647, 94);
-            this.btnJoker2Team2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnJoker2Team2.Margin = new System.Windows.Forms.Padding(2);
             this.btnJoker2Team2.Name = "btnJoker2Team2";
             this.btnJoker2Team2.Size = new System.Drawing.Size(143, 28);
             this.btnJoker2Team2.TabIndex = 13;
@@ -191,7 +192,7 @@
             // btnFragenManager
             // 
             this.btnFragenManager.Location = new System.Drawing.Point(27, 368);
-            this.btnFragenManager.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFragenManager.Margin = new System.Windows.Forms.Padding(2);
             this.btnFragenManager.Name = "btnFragenManager";
             this.btnFragenManager.Size = new System.Drawing.Size(134, 30);
             this.btnFragenManager.TabIndex = 14;
@@ -202,7 +203,7 @@
             // btnNeustarten
             // 
             this.btnNeustarten.Location = new System.Drawing.Point(27, 304);
-            this.btnNeustarten.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNeustarten.Margin = new System.Windows.Forms.Padding(2);
             this.btnNeustarten.Name = "btnNeustarten";
             this.btnNeustarten.Size = new System.Drawing.Size(133, 47);
             this.btnNeustarten.TabIndex = 15;
@@ -212,7 +213,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(27, 258);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(135, 27);
             this.button1.TabIndex = 16;
@@ -223,7 +224,7 @@
             // 
             this.lstProtokoll.FormattingEnabled = true;
             this.lstProtokoll.Location = new System.Drawing.Point(650, 200);
-            this.lstProtokoll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstProtokoll.Margin = new System.Windows.Forms.Padding(2);
             this.lstProtokoll.Name = "lstProtokoll";
             this.lstProtokoll.Size = new System.Drawing.Size(185, 199);
             this.lstProtokoll.TabIndex = 17;
@@ -274,7 +275,7 @@
             this.Controls.Add(this.btnAntwort2);
             this.Controls.Add(this.btnAntwort1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";

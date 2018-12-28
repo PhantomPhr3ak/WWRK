@@ -10,7 +10,7 @@ namespace WWRK
     class FragenManager
     {
         //Datenbank sachen
-        OleDbConnection db_connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=c:\bin\Addressen.mdb");
+        OleDbConnection db_connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=c:\bin\Addressen.mdb");
         private OleDbDataAdapter db_adapter;
         private OleDbCommand db_command;
 
