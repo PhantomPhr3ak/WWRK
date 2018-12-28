@@ -47,6 +47,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.lstProtokoll = new System.Windows.Forms.ListBox();
             this.lblProtokoll = new System.Windows.Forms.Label();
+            this.lblAktuellesTeam = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnAntwort1
@@ -143,7 +144,7 @@
             this.btnJoker1Team1.Name = "btnJoker1Team1";
             this.btnJoker1Team1.Size = new System.Drawing.Size(215, 43);
             this.btnJoker1Team1.TabIndex = 10;
-            this.btnJoker1Team1.Text = "button1";
+            this.btnJoker1Team1.Text = "50:50";
             this.btnJoker1Team1.UseVisualStyleBackColor = true;
             // 
             // btnJoker2Team1
@@ -152,7 +153,7 @@
             this.btnJoker2Team1.Name = "btnJoker2Team1";
             this.btnJoker2Team1.Size = new System.Drawing.Size(215, 43);
             this.btnJoker2Team1.TabIndex = 11;
-            this.btnJoker2Team1.Text = "button2";
+            this.btnJoker2Team1.Text = "Publikumsjoker";
             this.btnJoker2Team1.UseVisualStyleBackColor = true;
             // 
             // btnJoker1Team2
@@ -161,7 +162,7 @@
             this.btnJoker1Team2.Name = "btnJoker1Team2";
             this.btnJoker1Team2.Size = new System.Drawing.Size(215, 43);
             this.btnJoker1Team2.TabIndex = 12;
-            this.btnJoker1Team2.Text = "button3";
+            this.btnJoker1Team2.Text = "50:50";
             this.btnJoker1Team2.UseVisualStyleBackColor = true;
             // 
             // btnJoker2Team2
@@ -170,7 +171,7 @@
             this.btnJoker2Team2.Name = "btnJoker2Team2";
             this.btnJoker2Team2.Size = new System.Drawing.Size(215, 43);
             this.btnJoker2Team2.TabIndex = 13;
-            this.btnJoker2Team2.Text = "button4";
+            this.btnJoker2Team2.Text = "Publikumsjoker";
             this.btnJoker2Team2.UseVisualStyleBackColor = true;
             // 
             // btnFragenManager
@@ -218,11 +219,21 @@
             this.lblProtokoll.TabIndex = 18;
             this.lblProtokoll.Text = "Protokoll";
             // 
+            // lblAktuellesTeam
+            // 
+            this.lblAktuellesTeam.AutoSize = true;
+            this.lblAktuellesTeam.Location = new System.Drawing.Point(445, 132);
+            this.lblAktuellesTeam.Name = "lblAktuellesTeam";
+            this.lblAktuellesTeam.Size = new System.Drawing.Size(118, 20);
+            this.lblAktuellesTeam.TabIndex = 19;
+            this.lblAktuellesTeam.Text = "Aktuelles Team";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1278, 644);
+            this.Controls.Add(this.lblAktuellesTeam);
             this.Controls.Add(this.lblProtokoll);
             this.Controls.Add(this.lstProtokoll);
             this.Controls.Add(this.button1);
@@ -273,6 +284,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox lstProtokoll;
         private System.Windows.Forms.Label lblProtokoll;
+        private System.Windows.Forms.Label lblAktuellesTeam;
     }
 }
 
