@@ -13,7 +13,7 @@ namespace WWRK
     {
         //https://docs.microsoft.com/de-de/dotnet/framework/data/adonet/populating-a-dataset-from-a-dataadapter
         //Datenbank sachen
-        OleDbConnection db_connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=c:\bin\Addressen.mdb");
+        OleDbConnection db_connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=Adressen.mdb");
         private OleDbDataAdapter db_adapter;
         private OleDbCommand db_command;
         private DataSet alleFragenDataSet;
@@ -22,7 +22,7 @@ namespace WWRK
         //Fragen und Antworten
         private Frage[] fragenTeam1 = new Frage[5];
         private Frage[] fragenTeam2 = new Frage[5];
-        private Frage[] alleFragen;
+        private Frage[] alleFragen = new Frage[0];
 
         Random der_Zufall = new Random();
 
@@ -54,7 +54,7 @@ namespace WWRK
 
                 foreach (DataRow row in alleFragenDataSet.Tables["Fragen"].Rows)
                 {
-                    //einzelne Frage befüllen
+                    //Einzelne Frage befüllen
                     Frage _frage = new Frage(
                         row["Frage"].ToString(),
                         row["Antwort1"].ToString(),
@@ -70,7 +70,45 @@ namespace WWRK
 
         public void FragenAuswählen()
         {
-            
+            int random;
+
+            //Wenn genug Fragen für eine Runde vorhanden sind, wähle für jedes Team 5 Fragen zufällig aus
+            if (!(alleFragen.Length < 10))
+            {
+                //Team 1
+                for (int i = 0; i < 5; i++)
+                {
+                    //Zufallszahl bestimmen
+                    random = der_Zufall.Next(0, alleFragen.Length - 1);
+                    
+                    //Prüfen, ob Frage bereits zugewiesen ist.
+                    if (!fragenTeam1.Contains(alleFragen[random]) && !fragenTeam2.Contains(alleFragen[random]))
+                    {
+                        fragenTeam1[i] = alleFragen[random];
+                    }
+                    else
+                    {
+                        //TODO was passiert wenn die Frage bereits zugewiesen ist?
+                    }
+                }
+
+                //Team 2
+                for (int i = 0; i < 5; i++)
+                {
+                    //Zufallszahl bestimmen
+                    random = der_Zufall.Next(0, alleFragen.Length - 1);
+
+                    //Prüfen, ob Frage bereits zugewiesen ist.
+                    if (!fragenTeam1.Contains(alleFragen[random]) && !fragenTeam2.Contains(alleFragen[random]))
+                    {
+                        fragenTeam2[i] = alleFragen[random];
+                    }
+                    else
+                    {
+                        //TODO was passiert wenn die Frage bereits zugewiesen ist?
+                    }
+                }
+            }
         }
 
         public void NächsteFrage()

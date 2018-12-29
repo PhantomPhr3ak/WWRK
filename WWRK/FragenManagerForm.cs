@@ -20,7 +20,7 @@ namespace WWRK
 
     private void FragenManagerForm_Load(object sender, EventArgs e)
         {
-            OleDbConnection db_connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=c:\bin\Addressen.mdb");
+            OleDbConnection db_connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=Adressen.mdb");
             db_connection.Open();
             OleDbCommand select = new OleDbCommand();
             select.Connection = db_connection;
