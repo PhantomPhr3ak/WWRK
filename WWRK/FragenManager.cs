@@ -30,6 +30,13 @@ namespace WWRK
         FragenManager(Form1 _form)
         {
             form = _form;
+
+            db_command.Connection = db_connection;
+        }
+
+        public void AlleFragenLaden()
+        {
+            db_command.CommandText = "Select * FROM Fragen";
         }
 
         public void FragenAuswählen()
@@ -42,7 +49,7 @@ namespace WWRK
             
         }
 
-        public void AntwortBestätigen(string ausgewählteAntwort);
+        public void AntwortBestätigen(string ausgewählteAntwort)
         {
             
         }
