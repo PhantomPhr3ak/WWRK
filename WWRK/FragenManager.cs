@@ -124,9 +124,11 @@ namespace WWRK
 
         public void NächsteFrage()
         {
+            //Lokale Variablen
             int[] _positionen = new int[4];
             string[] _antworten = new string[4];
 
+            //Die Positionen für die Antworten zufällig bestimmen
             while (i < 4)
             {
                 int _random = der_Zufall.Next(1, 4);
@@ -139,9 +141,11 @@ namespace WWRK
 
             if (aktuellesTeam == 1 && !team1Ausgeschieden)
             {
+                //Aktuelle Frage laden
                 Frage _frage = fragenTeam1[aktuelleFrageTeam1];
                 form.lblFrage.Text = _frage.frage;
 
+                //Antworten in Array speichern
                 _antworten[0] = _frage.korrekteAntwort;
                 _antworten[1] = _frage.antwort1;
                 _antworten[2] = _frage.antwort2;
@@ -149,24 +153,72 @@ namespace WWRK
             }
             else if (aktuellesTeam == 2 && !team2Ausgeschieden)
             {
+                //Aktuelle Frage laden
                 Frage _frage = fragenTeam2[aktuelleFrageTeam2];
                 form.lblFrage.Text = _frage.frage;
 
+                //Antworten in Array speichern
                 _antworten[0] = _frage.korrekteAntwort;
                 _antworten[1] = _frage.antwort1;
                 _antworten[2] = _frage.antwort2;
                 _antworten[3] = _frage.antwort3;
             }
 
+            //Antworten auf Buttons anzeigen
             form.btnAntwort1.Text = _antworten[_positionen[0]];
             form.btnAntwort2.Text = _antworten[_positionen[1]];
             form.btnAntwort3.Text = _antworten[_positionen[2]];
             form.btnAntwort4.Text = _antworten[_positionen[3]];
         }
 
-        public void AntwortBestätigen(string ausgewählteAntwort)
+        public Boolean AntwortBestätigen(string ausgewählteAntwort)
         {
+            if (aktuellesTeam == 1)
+            {
+                //aktuelle Frage laden
+                Frage _frage = fragenTeam1[aktuelleFrageTeam1];
 
+                //Überprüfen, ob richtige Antwort ausgewählt wurde
+                if (ausgewählteAntwort == _frage.korrekteAntwort)
+                {
+                    //Ist das andere Team ausgeschieden?
+                    if (!team2Ausgeschieden)
+                    {
+                        aktuellesTeam = 2;
+                    }
+
+                    //Fragen Zähler erhöhen
+                    aktuelleFrageTeam1++;
+
+                    return true;
+                }
+                else
+                {
+                    //Team ausscheiden lassen
+                    team1Ausgeschieden = true;
+
+                    return false;
+                }
+            }
+            else if (aktuellesTeam == 2)
+            {
+                //TODO: oberen Teil kopieren und anpassen
+            }
+            //TODO: Endbedingung einfügen!!! (Nach der 5. Frage; Wenn beide Teams versagen)
+        }
+
+        public void Neustarten()
+        {
+            team1Ausgeschieden = false;
+            team2Ausgeschieden = false;
+
+            aktuelleFrageTeam1 = 0;
+            aktuelleFrageTeam2 = 0;
+
+            aktuellesTeam = 1;
+
+            AlleFragenLaden();
+            FragenAuswählen();
         }
     }
 }
