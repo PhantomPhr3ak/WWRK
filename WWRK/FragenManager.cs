@@ -26,11 +26,13 @@ namespace WWRK
 
         Random der_Zufall = new Random();
 
-        private int aktuellTeam1 = 0;
+        private int aktuelleFrageTeam1 = 0;
         private Boolean team1Ausgeschieden = false;
 
-        private int aktuellTeam2 = 0;
+        private int aktuelleFrageTeam2 = 0;
         private Boolean team2Ausgeschieden = false;
+
+        private int aktuellesTeam;
 
 
         private Form1 form;
@@ -122,7 +124,44 @@ namespace WWRK
 
         public void NächsteFrage()
         {
-            
+            int[] _positionen = new int[4];
+            string[] _antworten = new string[4];
+
+            while (i < 4)
+            {
+                int _random = der_Zufall.Next(1, 4);
+                if (!_positionen.Contains(_random))
+                {
+                    _positionen[i] = _random;
+                    i++;
+                }
+            }
+
+            if (aktuellesTeam == 1 && !team1Ausgeschieden)
+            {
+                Frage _frage = fragenTeam1[aktuelleFrageTeam1];
+                form.lblFrage.Text = _frage.frage;
+
+                _antworten[0] = _frage.korrekteAntwort;
+                _antworten[1] = _frage.antwort1;
+                _antworten[2] = _frage.antwort2;
+                _antworten[3] = _frage.antwort3;
+            }
+            else if (aktuellesTeam == 2 && !team2Ausgeschieden)
+            {
+                Frage _frage = fragenTeam2[aktuelleFrageTeam2];
+                form.lblFrage.Text = _frage.frage;
+
+                _antworten[0] = _frage.korrekteAntwort;
+                _antworten[1] = _frage.antwort1;
+                _antworten[2] = _frage.antwort2;
+                _antworten[3] = _frage.antwort3;
+            }
+
+            form.btnAntwort1.Text = _antworten[_positionen[0]];
+            form.btnAntwort2.Text = _antworten[_positionen[1]];
+            form.btnAntwort3.Text = _antworten[_positionen[2]];
+            form.btnAntwort4.Text = _antworten[_positionen[3]];
         }
 
         public void AntwortBestätigen(string ausgewählteAntwort)

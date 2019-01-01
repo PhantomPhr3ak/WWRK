@@ -268,26 +268,26 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnAntwort1;
-        private System.Windows.Forms.Button btnAntwort2;
-        private System.Windows.Forms.Button btnAntwort3;
-        private System.Windows.Forms.Button btnAntwort4;
-        private System.Windows.Forms.Button btnAntwortBestätigen;
-        private System.Windows.Forms.Label lblTeam1Name;
-        private System.Windows.Forms.Label lblTeam2Name;
-        private System.Windows.Forms.ProgressBar pbStatus;
-        private System.Windows.Forms.Label lblZeit;
-        private System.Windows.Forms.Label lblFrage;
-        private System.Windows.Forms.Button btnJoker1Team1;
-        private System.Windows.Forms.Button btnJoker2Team1;
-        private System.Windows.Forms.Button btnJoker1Team2;
-        private System.Windows.Forms.Button btnJoker2Team2;
-        private System.Windows.Forms.Button btnFragenManager;
-        private System.Windows.Forms.Button btnNeustarten;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox lstProtokoll;
-        private System.Windows.Forms.Label lblProtokoll;
-        private System.Windows.Forms.Label lblAktuellesTeam;
+        public System.Windows.Forms.Button btnAntwort1;
+        public System.Windows.Forms.Button btnAntwort2;
+        public System.Windows.Forms.Button btnAntwort4;
+        public System.Windows.Forms.Button btnAntwortBestätigen;
+        public System.Windows.Forms.Label lblTeam1Name;
+        public System.Windows.Forms.Label lblTeam2Name;
+        public System.Windows.Forms.ProgressBar pbStatus;
+        public System.Windows.Forms.Label lblZeit;
+        public System.Windows.Forms.Label lblFrage;
+        public System.Windows.Forms.Button btnJoker1Team1;
+        public System.Windows.Forms.Button btnJoker2Team1;
+        public System.Windows.Forms.Button btnJoker1Team2;
+        public System.Windows.Forms.Button btnJoker2Team2;
+        public System.Windows.Forms.Button btnFragenManager;
+        public System.Windows.Forms.Button btnNeustarten;
+        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.ListBox lstProtokoll;
+        public System.Windows.Forms.Label lblProtokoll;
+        public System.Windows.Forms.Label lblAktuellesTeam;
+        public System.Windows.Forms.Button btnAntwort3;
     }
 }
 
