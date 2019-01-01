@@ -78,37 +78,39 @@ namespace WWRK
             //Wenn genug Fragen für eine Runde vorhanden sind, wähle für jedes Team 5 Fragen zufällig aus
             if (!(alleFragen.Length < 10))
             {
+                i = 0;
+
                 //Team 1
-                for (int i = 0; i < 5; i++)
+                while (i < 5)
                 {
                     //Zufallszahl bestimmen
                     random = der_Zufall.Next(0, alleFragen.Length - 1);
                     
-                    //Prüfen, ob Frage bereits zugewiesen ist.
+                    //Prüfen, ob die zufällig ausgewählte Frage bereits zugewiesen ist, wenn nein dann:
+                    //      weise die Frage dem Team zu,
+                    //      erhöhe den Counter, sodass die nächste Frage zugewiesen wird.
                     if (!fragenTeam1.Contains(alleFragen[random]) && !fragenTeam2.Contains(alleFragen[random]))
                     {
                         fragenTeam1[i] = alleFragen[random];
-                    }
-                    else
-                    {
-                        //TODO was passiert, wenn die Frage bereits zugewiesen ist?
+                        i++;
                     }
                 }
 
+                i = 0;
+                
                 //Team 2
-                for (int i = 0; i < 5; i++)
+                while (i < 5)
                 {
                     //Zufallszahl bestimmen
                     random = der_Zufall.Next(0, alleFragen.Length - 1);
 
-                    //Prüfen, ob Frage bereits zugewiesen ist.
+                    //Prüfen, ob die zufällig ausgewählte Frage bereits zugewiesen ist, wenn nein dann:
+                    //      weise die Frage dem Team zu,
+                    //      erhöhe den Counter, sodass die nächste Frage zugewiesen wird.
                     if (!fragenTeam1.Contains(alleFragen[random]) && !fragenTeam2.Contains(alleFragen[random]))
                     {
                         fragenTeam2[i] = alleFragen[random];
-                    }
-                    else
-                    {
-                        //TODO was passiert, wenn die Frage bereits zugewiesen ist?
+                        i++;
                     }
                 }
             }
