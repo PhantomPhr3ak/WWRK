@@ -54,7 +54,7 @@ namespace WWRK
 
                 foreach (DataRow row in alleFragenDataSet.Tables["Fragen"].Rows)
                 {
-                    //Einzelne Frage befüllen
+                    //Einzelne Frage-Objekte befüllen
                     Frage _frage = new Frage(
                         row["Frage"].ToString(),
                         row["Antwort1"].ToString(),
@@ -64,6 +64,9 @@ namespace WWRK
 
                     //Frage ins Array einfügen
                     alleFragen[i] = _frage;
+
+                    //Counter erhöhen
+                    i++;
                 }
             }
         }
@@ -88,7 +91,7 @@ namespace WWRK
                     }
                     else
                     {
-                        //TODO was passiert wenn die Frage bereits zugewiesen ist?
+                        //TODO was passiert, wenn die Frage bereits zugewiesen ist?
                     }
                 }
 
@@ -105,7 +108,7 @@ namespace WWRK
                     }
                     else
                     {
-                        //TODO was passiert wenn die Frage bereits zugewiesen ist?
+                        //TODO was passiert, wenn die Frage bereits zugewiesen ist?
                     }
                 }
             }
