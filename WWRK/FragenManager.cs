@@ -26,8 +26,12 @@ namespace WWRK
 
         Random der_Zufall = new Random();
 
-        private int aktuellTeam1;
-        private int aktuellTeam2;
+        private int aktuellTeam1 = 0;
+        private Boolean team1Ausgeschieden = false;
+
+        private int aktuellTeam2 = 0;
+        private Boolean team2Ausgeschieden = false;
+
 
         private Form1 form;
 

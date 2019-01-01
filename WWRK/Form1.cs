@@ -12,7 +12,7 @@ namespace WWRK
 {
     public partial class Form1 : Form
     {
-        readonly FragenManagerForm _fragenManager = new FragenManagerForm();
+        readonly FragenManagerForm _fragenManagerForm = new FragenManagerForm();
         
         public Form1()
         {
@@ -21,7 +21,12 @@ namespace WWRK
 
         private void btnFragenManager_Click(object sender, EventArgs e)
         {
-            _fragenManager.Show();
+            _fragenManagerForm.Show();
+        }
+
+        private void btnAntwortBestätigen_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
