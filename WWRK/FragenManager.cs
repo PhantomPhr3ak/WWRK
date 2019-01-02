@@ -39,16 +39,19 @@ namespace WWRK
 
         private int i, j, k;
 
-        FragenManager(Form1 _form)
+        public FragenManager(Form1 _form)
         {
             form = _form;
             
             AlleFragenLaden();
             FragenAuswählen();
+            NächsteFrage();
         }
 
         public void AlleFragenLaden()
         {
+            alleFragenDataSet = new DataSet();
+
             //Daten aus DB laden
             db_adapter = new OleDbDataAdapter("SELECT * FROM Fragen", db_connection);
             db_adapter.Fill(alleFragenDataSet, "Fragen");
@@ -124,14 +127,20 @@ namespace WWRK
 
         public void NächsteFrage()
         {
+            if (fragenTeam1.Length < 5)
+            {
+                return;
+            }
+
             //Lokale Variablen
-            int[] _positionen = new int[4];
+            int[] _positionen = {-1,-1,-1,-1};
             string[] _antworten = new string[4];
+            Frage _frage = new Frage("","","","","");
 
             //Die Positionen für die Antworten zufällig bestimmen
             while (i < 4)
             {
-                int _random = der_Zufall.Next(1, 4);
+                int _random = der_Zufall.Next( 0, 4);
                 if (!_positionen.Contains(_random))
                 {
                     _positionen[i] = _random;
@@ -142,27 +151,21 @@ namespace WWRK
             if (aktuellesTeam == 1 && !team1Ausgeschieden)
             {
                 //Aktuelle Frage laden
-                Frage _frage = fragenTeam1[aktuelleFrageTeam1];
+                _frage = fragenTeam1[aktuelleFrageTeam1];
                 form.lblFrage.Text = _frage.frage;
-
-                //Antworten in Array speichern
-                _antworten[0] = _frage.korrekteAntwort;
-                _antworten[1] = _frage.antwort1;
-                _antworten[2] = _frage.antwort2;
-                _antworten[3] = _frage.antwort3;
             }
             else if (aktuellesTeam == 2 && !team2Ausgeschieden)
             {
                 //Aktuelle Frage laden
-                Frage _frage = fragenTeam2[aktuelleFrageTeam2];
+                _frage = fragenTeam2[aktuelleFrageTeam2];
                 form.lblFrage.Text = _frage.frage;
-
-                //Antworten in Array speichern
-                _antworten[0] = _frage.korrekteAntwort;
-                _antworten[1] = _frage.antwort1;
-                _antworten[2] = _frage.antwort2;
-                _antworten[3] = _frage.antwort3;
             }
+
+            //Antworten in Array speichern
+            _antworten[0] = _frage.korrekteAntwort;
+            _antworten[1] = _frage.antwort1;
+            _antworten[2] = _frage.antwort2;
+            _antworten[3] = _frage.antwort3;
 
             //Antworten auf Buttons anzeigen
             form.btnAntwort1.Text = _antworten[_positionen[0]];
@@ -187,7 +190,7 @@ namespace WWRK
                         aktuellesTeam = 2;
                     }
 
-                    //Fragen Zähler erhöhen
+                    //Fragen-Zähler erhöhen
                     aktuelleFrageTeam1++;
 
                     return true;
@@ -205,6 +208,7 @@ namespace WWRK
                 //TODO: oberen Teil kopieren und anpassen
             }
             //TODO: Endbedingung einfügen!!! (Nach der 5. Frage; Wenn beide Teams versagen)
+            return false;
         }
 
         public void Neustarten()

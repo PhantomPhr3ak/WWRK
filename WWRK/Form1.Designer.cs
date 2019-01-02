@@ -58,6 +58,7 @@
             this.btnAntwort1.TabIndex = 0;
             this.btnAntwort1.Text = "Antwort 1";
             this.btnAntwort1.UseVisualStyleBackColor = true;
+            this.btnAntwort1.Click += new System.EventHandler(this.btnAntwort1_Click);
             // 
             // btnAntwort2
             // 
@@ -67,6 +68,7 @@
             this.btnAntwort2.TabIndex = 1;
             this.btnAntwort2.Text = "Antwort 2";
             this.btnAntwort2.UseVisualStyleBackColor = true;
+            this.btnAntwort2.Click += new System.EventHandler(this.btnAntwort2_Click);
             // 
             // btnAntwort3
             // 
@@ -76,6 +78,7 @@
             this.btnAntwort3.TabIndex = 2;
             this.btnAntwort3.Text = "Antwort 3";
             this.btnAntwort3.UseVisualStyleBackColor = true;
+            this.btnAntwort3.Click += new System.EventHandler(this.btnAntwort3_Click);
             // 
             // btnAntwort4
             // 
@@ -85,6 +88,7 @@
             this.btnAntwort4.TabIndex = 3;
             this.btnAntwort4.Text = "Antwort 4";
             this.btnAntwort4.UseVisualStyleBackColor = true;
+            this.btnAntwort4.Click += new System.EventHandler(this.btnAntwort4_Click);
             // 
             // btnAntwortBestätigen
             // 
