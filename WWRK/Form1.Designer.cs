@@ -105,18 +105,18 @@
             this.lblTeam1Name.AutoSize = true;
             this.lblTeam1Name.Location = new System.Drawing.Point(178, 42);
             this.lblTeam1Name.Name = "lblTeam1Name";
-            this.lblTeam1Name.Size = new System.Drawing.Size(51, 20);
+            this.lblTeam1Name.Size = new System.Drawing.Size(62, 20);
             this.lblTeam1Name.TabIndex = 5;
-            this.lblTeam1Name.Text = "label1";
+            this.lblTeam1Name.Text = "Team 1";
             // 
             // lblTeam2Name
             // 
             this.lblTeam2Name.AutoSize = true;
             this.lblTeam2Name.Location = new System.Drawing.Point(1056, 42);
             this.lblTeam2Name.Name = "lblTeam2Name";
-            this.lblTeam2Name.Size = new System.Drawing.Size(51, 20);
+            this.lblTeam2Name.Size = new System.Drawing.Size(62, 20);
             this.lblTeam2Name.TabIndex = 6;
-            this.lblTeam2Name.Text = "label1";
+            this.lblTeam2Name.Text = "Team 2";
             // 
             // pbStatus
             // 
