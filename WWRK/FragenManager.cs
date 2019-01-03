@@ -22,7 +22,9 @@ namespace WWRK
         //Fragen und Antworten
         private Frage[] fragenTeam1 = new Frage[5];
         private Frage[] fragenTeam2 = new Frage[5];
-        private Frage[] alleFragen = new Frage[0];
+        //private Frage[] alleFragen = new Frage[10000];
+
+        private List<Frage> alleFragenList = new List<Frage>(0);
 
         Random der_Zufall = new Random();
 
@@ -43,9 +45,7 @@ namespace WWRK
         {
             form = _form;
             
-            AlleFragenLaden();
-            FragenAuswählen();
-            NächsteFrage();
+            Neustarten();
         }
 
         public void AlleFragenLaden()
@@ -72,7 +72,8 @@ namespace WWRK
                         row["Antwort4"].ToString());
 
                     //Frage ins Array einfügen
-                    alleFragen[i] = _frage;
+                    //alleFragen[i] = _frage;
+                    alleFragenList.Add(_frage);
 
                     //Counter erhöhen
                     i++;
@@ -85,7 +86,7 @@ namespace WWRK
             int random;
 
             //Wenn genug Fragen für eine Runde vorhanden sind, wähle für jedes Team 5 Fragen zufällig aus
-            if (!(alleFragen.Length < 10))
+            if (!(alleFragenList.Count < 10))
             {
                 i = 0;
 
@@ -93,14 +94,14 @@ namespace WWRK
                 while (i < 5)
                 {
                     //Zufallszahl bestimmen
-                    random = der_Zufall.Next(0, alleFragen.Length - 1);
+                    random = der_Zufall.Next(0, alleFragenList.Count);
                     
                     //Prüfen, ob die zufällig ausgewählte Frage bereits zugewiesen ist, wenn nein dann:
                     //      weise die Frage dem Team zu,
                     //      erhöhe den Counter, sodass die nächste Frage zugewiesen wird.
-                    if (!fragenTeam1.Contains(alleFragen[random]) && !fragenTeam2.Contains(alleFragen[random]))
+                    if (!fragenTeam1.Contains(alleFragenList[random]) && !fragenTeam2.Contains(alleFragenList[random]))
                     {
-                        fragenTeam1[i] = alleFragen[random];
+                        fragenTeam1[i] = alleFragenList[random];
                         i++;
                     }
                 }
@@ -111,14 +112,14 @@ namespace WWRK
                 while (i < 5)
                 {
                     //Zufallszahl bestimmen
-                    random = der_Zufall.Next(0, alleFragen.Length - 1);
+                    random = der_Zufall.Next(0, alleFragenList.Count);
 
                     //Prüfen, ob die zufällig ausgewählte Frage bereits zugewiesen ist, wenn nein dann:
                     //      weise die Frage dem Team zu,
                     //      erhöhe den Counter, sodass die nächste Frage zugewiesen wird.
-                    if (!fragenTeam1.Contains(alleFragen[random]) && !fragenTeam2.Contains(alleFragen[random]))
+                    if (!fragenTeam1.Contains(alleFragenList[random]) && !fragenTeam2.Contains(alleFragenList[random]))
                     {
-                        fragenTeam2[i] = alleFragen[random];
+                        fragenTeam2[i] = alleFragenList[random];
                         i++;
                     }
                 }
@@ -137,6 +138,7 @@ namespace WWRK
             string[] _antworten = new string[4];
             Frage _frage = new Frage("","","","","");
 
+            i = 0;
             //Die Positionen für die Antworten zufällig bestimmen
             while (i < 4)
             {
@@ -223,6 +225,7 @@ namespace WWRK
 
             AlleFragenLaden();
             FragenAuswählen();
+            NächsteFrage();
         }
     }
 }
