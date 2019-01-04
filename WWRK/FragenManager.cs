@@ -365,6 +365,38 @@ namespace WWRK
 
                 NächsteFrage();
             }
+            else if (aktuelleFrageTeam1 == 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
+                     team2Ausgeschieden == false)
+            {
+                //  -   Spiel geht normal weiter !
+
+                if (aktuellesTeam == 1)
+                {
+                    aktuellesTeam = 2;
+                }
+                else
+                {
+                    aktuellesTeam = 1;
+                }
+
+                NächsteFrage();
+            }
+            else if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 == 5 && team1Ausgeschieden == false &&
+                     team2Ausgeschieden == false)
+            {
+                //  -   Spiel geht normal weiter !
+
+                if (aktuellesTeam == 1)
+                {
+                    aktuellesTeam = 2;
+                }
+                else
+                {
+                    aktuellesTeam = 1;
+                }
+
+                NächsteFrage();
+            }
             else if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == true &&
                      team2Ausgeschieden == false)
             {
@@ -425,8 +457,8 @@ namespace WWRK
 
                 Neustarten();
             }
-            else if (aktuelleFrageTeam1 < aktuelleFrageTeam2 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
-                     team2Ausgeschieden == false)
+            else if (aktuelleFrageTeam1 < aktuelleFrageTeam2 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == true &&
+                     team2Ausgeschieden == true)
             {
                 //  -   Team 2 gewinnt
 
