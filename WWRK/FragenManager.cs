@@ -183,6 +183,7 @@ namespace WWRK
                 //aktuelle Frage laden
                 Frage _frage = fragenTeam1[aktuelleFrageTeam1];
 
+
                 //Überprüfen, ob richtige Antwort ausgewählt wurde
                 if (ausgewählteAntwort == _frage.korrekteAntwort)
                 {
@@ -191,106 +192,20 @@ namespace WWRK
                     System.Threading.Thread.Sleep(1000);
                     form.btnAntwortBestätigen.BackColor = Color.LightGray;
 
-                    //Ist das andere Team ausgeschieden?
-                    if (!team2Ausgeschieden)
-                    {
-                        aktuellesTeam = 2;
-                    }
-
-                    if (aktuelleFrageTeam1 < 4 && aktuelleFrageTeam2 < 4 && team1Ausgeschieden == false &&
-                        team2Ausgeschieden == false)
-                    {
-                        //  -   Noch nicht zu Ende und beide Teams drin
-
-                        //Fragen-Zähler erhöhen
-                        aktuelleFrageTeam1++;
-
-                        //Nächste Frage anzeigen
-                        NächsteFrage();
-                    }
-                    else if (aktuelleFrageTeam1 == 4 && aktuelleFrageTeam2 < 4 && team1Ausgeschieden == false &&
-                             team2Ausgeschieden == true)
-                    {
-                        //  -   Team 1 gewinnt
-
-                        MessageBox.Show(
-                            "Team 1 hat gewonnen",
-                            "Spiel beendet!",
-                            MessageBoxButtons.OK);
-                    }
-                    else if (aktuelleFrageTeam1 == 4 && aktuelleFrageTeam2 == 4 && team1Ausgeschieden == false &&
-                             team2Ausgeschieden == false)
-                    {
-                        //  -   Unentschieden
-
-                        MessageBox.Show(
-                            "Unentschieden \nBeide Teams haben gleich viele Fragen richtig beantwortet.",
-                            "Spiel beendet!",
-                            MessageBoxButtons.OK);
-                    }
-                    else
-                    {
-                        
-                    }
+                    //Fragen-Zähler erhöhen
+                    aktuelleFrageTeam1++;
                 }
                 else
                 {
                     //Team ausscheiden lassen
                     team1Ausgeschieden = true;
-
-                    //Bestimmung des weiteren Ablaufs der Runde
-                    if (aktuelleFrageTeam1 == aktuelleFrageTeam2 && team1Ausgeschieden == true && team2Ausgeschieden == true)
-                    {
-                        //  -   Unentschieden
-
-                        MessageBox.Show(
-                            "Unentschieden \nBeide Teams haben gleich viele Fragen richtig beantwortet.",
-                            "Spiel beendet!",
-                            MessageBoxButtons.OK);
-                    }
-                    else if (aktuelleFrageTeam1 < aktuelleFrageTeam2 && team1Ausgeschieden == true &&
-                             team2Ausgeschieden == true)
-                    {
-                        //  -   Team 2 gewinnt
-
-                        MessageBox.Show(
-                            "Team 2 hat gewonnen",
-                            "Spiel beendet!",
-                            MessageBoxButtons.OK);
-                    }
-                    else if (aktuelleFrageTeam1 > aktuelleFrageTeam2 && team1Ausgeschieden == true &&
-                             team2Ausgeschieden == true)
-                    {
-                        //  -   Team 1 gewinnt
-
-                        MessageBox.Show(
-                            "Team 1 hat gewonnen",
-                            "Spiel beendet!",
-                            MessageBoxButtons.OK);
-                    }
-                    else
-                    {
-                        //  -   Team 1 ausgeschieden aber Team 2 noch drin
-
-                        MessageBox.Show(
-                            "Falsche Antwort!\nTeam " + aktuellesTeam.ToString() + " ausgeschieden!",
-                            "Falsche Antwort!",
-                            MessageBoxButtons.OK);
-
-                        aktuellesTeam = 2;
-
-                        NächsteFrage();
-                    }
                 }
             }
             else if (aktuellesTeam == 2)
             {
-                //TODO: oberen Teil kopieren und anpassen
-
-
-
                 //aktuelle Frage laden
-                Frage _frage = fragenTeam1[aktuelleFrageTeam2];
+                Frage _frage = fragenTeam2[aktuelleFrageTeam2];
+
 
                 //Überprüfen, ob richtige Antwort ausgewählt wurde
                 if (ausgewählteAntwort == _frage.korrekteAntwort)
@@ -300,98 +215,250 @@ namespace WWRK
                     System.Threading.Thread.Sleep(1000);
                     form.btnAntwortBestätigen.BackColor = Color.LightGray;
 
-                    //Ist das andere Team ausgeschieden?
-                    if (!team1Ausgeschieden)
-                    {
-                        aktuellesTeam = 2;
-                    }
-
-                    if (aktuelleFrageTeam1 < 4 && aktuelleFrageTeam2 < 4 && team1Ausgeschieden == false &&
-                        team2Ausgeschieden == false)
-                    {
-                        //  -   Noch nicht zu Ende und beide Teams drin
-
-                        //Fragen-Zähler erhöhen
-                        aktuelleFrageTeam1++;
-
-                        //Nächste Frage anzeigen
-                        NächsteFrage();
-                    }
-                    else if (aktuelleFrageTeam1 < 4 && aktuelleFrageTeam2 == 4 && team1Ausgeschieden == true &&
-                             team2Ausgeschieden == false)
-                    {
-                        //  -   Team 2 gewinnt
-
-                        MessageBox.Show(
-                            "Team 1 hat gewonnen",
-                            "Spiel beendet!",
-                            MessageBoxButtons.OK);
-                    }
-                    else if (aktuelleFrageTeam1 == 4 && aktuelleFrageTeam2 == 4 && team1Ausgeschieden == false &&
-                             team2Ausgeschieden == false)
-                    {
-                        //  -   Unentschieden
-
-                        MessageBox.Show(
-                            "Unentschieden \nBeide Teams haben gleich viele Fragen richtig beantwortet.",
-                            "Spiel beendet!",
-                            MessageBoxButtons.OK);
-                    }
-                    else
-                    {
-
-                    }
+                    //Fragen-Zähler erhöhen
+                    aktuelleFrageTeam2++;
                 }
                 else
                 {
                     //Team ausscheiden lassen
-                    team1Ausgeschieden = true;
-
-                    //Bestimmung des weiteren Ablaufs der Runde
-                    if (aktuelleFrageTeam1 == aktuelleFrageTeam2 && team1Ausgeschieden == true && team2Ausgeschieden == true)
-                    {
-                        //  -   Unentschieden
-
-                        MessageBox.Show(
-                            "Unentschieden \nBeide Teams haben gleich viele Fragen richtig beantwortet.",
-                            "Spiel beendet!",
-                            MessageBoxButtons.OK);
-                    }
-                    else if (aktuelleFrageTeam1 < aktuelleFrageTeam2 && team1Ausgeschieden == true &&
-                             team2Ausgeschieden == true)
-                    {
-                        //  -   Team 2 gewinnt
-
-                        MessageBox.Show(
-                            "Team 2 hat gewonnen",
-                            "Spiel beendet!",
-                            MessageBoxButtons.OK);
-                    }
-                    else if (aktuelleFrageTeam1 > aktuelleFrageTeam2 && team1Ausgeschieden == true &&
-                             team2Ausgeschieden == true)
-                    {
-                        //  -   Team 1 gewinnt
-
-                        MessageBox.Show(
-                            "Team 1 hat gewonnen",
-                            "Spiel beendet!",
-                            MessageBoxButtons.OK);
-                    }
-                    else
-                    {
-                        //  -   Team 1 ausgeschieden aber Team 2 noch drin
-
-                        MessageBox.Show(
-                            "Falsche Antwort!\nTeam " + aktuellesTeam.ToString() + " ausgeschieden!",
-                            "Falsche Antwort!",
-                            MessageBoxButtons.OK);
-
-                        aktuellesTeam = 2;
-
-                        NächsteFrage();
-                    }
+                    team2Ausgeschieden = true;
                 }
             }
+
+            //------------------
+            //  Ende bestimmen
+            //------------------
+
+            #region test
+
+            /*if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
+                team2Ausgeschieden == false)
+            {
+                //  -   Noch nicht zu Ende und beide Teams drin
+
+                NächsteFrage();
+            }
+            else if (aktuelleFrageTeam1 == 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
+                     team2Ausgeschieden == true)
+            {
+                //  -   Team 1 gewinnt
+
+                MessageBox.Show(
+                    "Team 1 hat gewonnen",
+                    "Spiel beendet!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+            else if (aktuelleFrageTeam1 == 5 && aktuelleFrageTeam2 == 5 && team1Ausgeschieden == false &&
+                     team2Ausgeschieden == false)
+            {
+                //  -   Unentschieden
+
+                MessageBox.Show(
+                    "Unentschieden \nBeide Teams haben gleich viele Fragen richtig beantwortet.",
+                    "Spiel beendet!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+            else if (aktuelleFrageTeam1 == aktuelleFrageTeam2 && team1Ausgeschieden == true && team2Ausgeschieden == true)
+            {
+                //  -   Unentschieden
+
+                MessageBox.Show(
+                    "Unentschieden \nBeide Teams haben gleich viele Fragen richtig beantwortet.",
+                    "Spiel beendet!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+            else if (aktuelleFrageTeam1 < aktuelleFrageTeam2 && team1Ausgeschieden == true &&
+                     team2Ausgeschieden == true)
+            {
+                //  -   Team 2 gewinnt
+
+                MessageBox.Show(
+                    "Team 2 hat gewonnen",
+                    "Spiel beendet!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+            else if (aktuelleFrageTeam1 > aktuelleFrageTeam2 && team1Ausgeschieden == true &&
+                     team2Ausgeschieden == true)
+            {
+                //  -   Team 1 gewinnt
+
+                MessageBox.Show(
+                    "Team 1 hat gewonnen",
+                    "Spiel beendet!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+            else
+            {
+                //  -   Team 1 ausgeschieden aber Team 2 noch drin
+
+                MessageBox.Show(
+                    "Falsche Antwort!\nTeam " + aktuellesTeam.ToString() + " ausgeschieden!",
+                    "Falsche Antwort!",
+                    MessageBoxButtons.OK);
+
+                aktuellesTeam = 2;
+
+                NächsteFrage();
+            }*/
+
+            #endregion
+
+            if (aktuelleFrageTeam1 == 5 && aktuelleFrageTeam2 == 5 && team1Ausgeschieden == false &&
+                team2Ausgeschieden == false)
+            {
+                //  -   Unentschieden
+
+                MessageBox.Show(
+                    "Unentschieden \nBeide Teams haben gleich viele Fragen richtig beantwortet.",
+                    "Spiel beendet!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+            else if(aktuelleFrageTeam1 == 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
+                    team2Ausgeschieden == true)
+            {
+                //  -   Team 1 gewinnt
+
+                MessageBox.Show(
+                    "Team 1 hat gewonnen",
+                    "Spiel beendet!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+            else if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 == 5 && team1Ausgeschieden == true &&
+                     team2Ausgeschieden == false)
+            {
+                //  -   Team 2 gewinnt
+
+                MessageBox.Show(
+                    "Team 2 hat gewonnen",
+                    "Spiel beendet!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+            else if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
+                     team2Ausgeschieden == false)
+            {
+                //  -   Spiel geht normal weiter
+
+                if (aktuellesTeam == 1)
+                {
+                    aktuellesTeam = 2;
+                }
+                else
+                {
+                    aktuellesTeam = 1;
+                }
+
+                NächsteFrage();
+            }
+            else if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == true &&
+                     team2Ausgeschieden == false)
+            {
+                //  -   Team 2 darf weiter spielen
+
+                if (aktuellesTeam == 1)
+                {
+                    aktuellesTeam = 2;
+                }
+                
+                NächsteFrage();
+            }
+            else if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
+                     team2Ausgeschieden == true)
+            {
+                //  -   Team 1 darf weiter spielen
+
+                if (aktuellesTeam == 2)
+                {
+                    aktuellesTeam = 1;
+                }
+
+                NächsteFrage();
+            }
+            else if (aktuelleFrageTeam1 < aktuelleFrageTeam2 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == true &&
+                     team2Ausgeschieden == false)
+            {
+                //  -   Team 2 darf weiter spielen
+
+                if (aktuellesTeam == 1)
+                {
+                    aktuellesTeam = 2;
+                }
+
+                NächsteFrage();
+            }
+            else if (aktuelleFrageTeam2 < aktuelleFrageTeam1 && aktuelleFrageTeam1 < 5 && team1Ausgeschieden == false &&
+                     team2Ausgeschieden == true)
+            {
+                //  -   Team 1 darf weiter spielen
+
+                if (aktuellesTeam == 2)
+                {
+                    aktuellesTeam = 1;
+                }
+
+                NächsteFrage();
+            }
+            else if (aktuelleFrageTeam2 < aktuelleFrageTeam1 && aktuelleFrageTeam1 < 5 && team1Ausgeschieden == true &&
+                     team2Ausgeschieden == true)
+            {
+                //  -   Team 1 gewinnt
+
+                MessageBox.Show(
+                    "Team 1 hat gewonnen",
+                    "Spiel beendet!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+            else if (aktuelleFrageTeam1 < aktuelleFrageTeam2 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
+                     team2Ausgeschieden == false)
+            {
+                //  -   Team 2 gewinnt
+
+                MessageBox.Show(
+                    "Team 2 hat gewonnen",
+                    "Spiel beendet!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+            else if (aktuelleFrageTeam1 == aktuelleFrageTeam2 && team1Ausgeschieden == true && team2Ausgeschieden == true)
+            {
+                //  -   Unentschieden
+
+                MessageBox.Show(
+                    "Unentschieden \nBeide Teams haben gleich viele Fragen richtig beantwortet.",
+                    "Spiel beendet!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Unerwartetes Verhalten! Runde wird neugestartet!",
+                    "Fehler!",
+                    MessageBoxButtons.OK);
+
+                Neustarten();
+            }
+
+
             //TODO: Endbedingung einfügen!!! (Nach der 5. Frage; Wenn beide Teams versagen)
         }
 
