@@ -18,8 +18,7 @@ namespace WWRK
         private OleDbDataAdapter db_adapter;
         private OleDbCommand db_command;
         private DataSet alleFragenDataSet;
-
-
+        
         //Fragen und Antworten
         private Frage[] fragenTeam1 = new Frage[5];
         private Frage[] fragenTeam2 = new Frage[5];
@@ -37,10 +36,11 @@ namespace WWRK
 
         private int aktuellesTeam;
 
-
         private Form1 form;
 
         private int i, j, k;
+
+        private int _richtigeAntwor;
 
         public FragenManager(Form1 _form)
         {
@@ -98,8 +98,8 @@ namespace WWRK
                     random = der_Zufall.Next(0, alleFragenList.Count);
                     
                     //Prüfen, ob die zufällig ausgewählte Frage bereits zugewiesen ist, wenn nein dann:
-                    //      weise die Frage dem Team zu,
-                    //      erhöhe den Counter, sodass die nächste Frage zugewiesen wird.
+                    //weise die Frage dem Team zu,
+                    //erhöhe den Counter, sodass die nächste Frage zugewiesen wird.
                     if (!fragenTeam1.Contains(alleFragenList[random]) && !fragenTeam2.Contains(alleFragenList[random]))
                     {
                         fragenTeam1[i] = alleFragenList[random];
@@ -182,8 +182,7 @@ namespace WWRK
             {
                 //aktuelle Frage laden
                 Frage _frage = fragenTeam1[aktuelleFrageTeam1];
-
-
+                
                 //Überprüfen, ob richtige Antwort ausgewählt wurde
                 if (ausgewählteAntwort == _frage.korrekteAntwort)
                 {
@@ -509,7 +508,12 @@ namespace WWRK
             NächsteFrage();
         }
 
-        public int getAktuellesTeam()
+        public int RichtigeAntwort()
+        {
+            return 1;
+        }
+
+        public int GetAktuellesTeam()
         {
             return aktuellesTeam;
         }

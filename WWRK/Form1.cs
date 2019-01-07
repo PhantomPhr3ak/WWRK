@@ -14,6 +14,7 @@ namespace WWRK
     {
         readonly FragenManagerForm _fragenManagerForm = new FragenManagerForm();
         private FragenManager fragenManager;
+        private Joker _joker;
         
         public Form1()
         {

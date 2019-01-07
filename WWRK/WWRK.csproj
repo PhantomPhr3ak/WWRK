@@ -64,6 +64,7 @@
     <Compile Include="FragenManagerForm.Designer.cs">
       <DependentUpon>FragenManagerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Joker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

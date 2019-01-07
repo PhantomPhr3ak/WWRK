@@ -20,17 +20,17 @@ namespace WWRK
 
     private void FragenManagerForm_Load(object sender, EventArgs e)
         {
-            OleDbConnection db_connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=Adressen.mdb");
-            db_connection.Open();
-            OleDbCommand select = new OleDbCommand();
-            select.Connection = db_connection;
-            select.CommandText = "Select * From Adressen = ' '";
-            OleDbDataReader reader = select.ExecuteReader();
-            while (reader != null && reader.Read())
-            {
-                lstBox_Questions.Items.Add(reader[1] + "," + reader[2]);
-            }
-            db_connection.Close();
+            //OleDbConnection db_connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=Adressen.mdb");
+            //db_connection.Open();
+            //OleDbCommand select = new OleDbCommand();
+            //select.Connection = db_connection;
+            //select.CommandText = "Select * From Adressen = ' '";
+            //OleDbDataReader reader = select.ExecuteReader();
+            //while (reader != null && reader.Read())
+            //{
+            //    lstBox_Questions.Items.Add(reader[1] + "," + reader[2]);
+            //}
+            //db_connection.Close();
         }
 
         private void lstBox_Questions_SelectedIndexChanged(object sender, EventArgs e)
