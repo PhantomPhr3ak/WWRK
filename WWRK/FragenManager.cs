@@ -42,12 +42,7 @@ namespace WWRK
         private int i, j, k;
 
         private int _richtigeAntwort;
-
-        private bool _team1FiftyFifty = false;
-        private bool _team1Publikum = false;
-        private bool _team2FiftyFifty = false;
-        private bool _team12Publikum = false;
-
+        
         public FragenManager(Form1 _form)
         {
             form = _form;
@@ -545,6 +540,7 @@ namespace WWRK
                 korrekteAntwortButtonIndex = 4;
             }
 
+            _richtigeAntwort = korrekteAntwortButtonIndex;
             return korrekteAntwortButtonIndex;
         }
 
@@ -553,8 +549,17 @@ namespace WWRK
             return aktuellesTeam;
         }
 
-        public void FiftyfiftyJoker()
+        public void FiftyfiftyJoker(int aktuellesTeam)
         {
+            if (aktuellesTeam == 1)
+            {
+                form.btnJoker1Team1.Enabled = false;
+            }
+            else
+            {
+                form.btnJoker1Team2.Enabled = false;
+            }
+
             int btn1;
             int btn2;
             do
@@ -579,10 +584,23 @@ namespace WWRK
             {
                 form.btnAntwort4.Enabled = false;
             }
+            
+
         }
 
-        public void PublikumsJoker()
+        public void PublikumsJoker(int aktuellesTeam)
         {
+            if (this.aktuellesTeam == 1)
+            {
+                form.btnJoker2Team1.Enabled = false;
+            }
+            else
+            {
+                form.btnJoker2Team2.Enabled = false;
+            }
+
+            int richtigeAntwort = _richtigeAntwort;
+
             int chanceRight = der_Zufall.Next(25, 75);
             int chance1 = der_Zufall.Next(0, (100 - chanceRight + 15));
             int chance2 = der_Zufall.Next(0, (100 - chanceRight + 15));
@@ -601,17 +619,44 @@ namespace WWRK
                     case 3:
                         chance3 = chance3 - ((chanceRight + chance1 + chance2 + chance3) - 100);
                         break;
-                    default:
-                        break;
                 }
             }
 
-            MessageBox.Show("Das Publikum hat folgendermaßen abgestimmt: " + Environment.NewLine +
-                            "Antwort 1: XXX%" + Environment.NewLine +
-                            "Antwort 2: XXX%" + Environment.NewLine +
-                            "Antwort 3: XXX%" + Environment.NewLine +
-                            "Antwort 4: XXX%",
-                            "Publikumsjoker", MessageBoxButtons.OK);
+            switch (richtigeAntwort)
+            {
+                case 1:
+                    MessageBox.Show(@"Das Publikum hat folgendermaßen abgestimmt: " + Environment.NewLine +
+                                    @"Antwort 1: " + chanceRight + @"%" + Environment.NewLine +
+                                    @"Antwort 2: " + chance1 + @"%" + Environment.NewLine +
+                                    @"Antwort 3: " + chance2 + @"%" + Environment.NewLine +
+                                    @"Antwort 4: " + chance3 + @"%",
+                        @"Publikumsjoker", MessageBoxButtons.OK);
+                    break;
+                case 2:
+                    MessageBox.Show(@"Das Publikum hat folgendermaßen abgestimmt: " + Environment.NewLine +
+                                    @"Antwort 1: " + chance3 + @"%" + Environment.NewLine +
+                                    @"Antwort 2: " + chanceRight + @"%" + Environment.NewLine +
+                                    @"Antwort 3: " + chance1 + @"%" + Environment.NewLine +
+                                    @"Antwort 4: " + chance2 + @"%",
+                        @"Publikumsjoker", MessageBoxButtons.OK);
+                    break;
+                case 3:
+                    MessageBox.Show(@"Das Publikum hat folgendermaßen abgestimmt: " + Environment.NewLine +
+                                    @"Antwort 1: " + chance2 + @"%" + Environment.NewLine +
+                                    @"Antwort 2: " + chance3 + @"%" + Environment.NewLine +
+                                    @"Antwort 3: " + chanceRight + @"%" + Environment.NewLine +
+                                    @"Antwort 4: " + chance1 + @"%",
+                        @"Publikumsjoker", MessageBoxButtons.OK);
+                    break;
+                case 4:
+                    MessageBox.Show(@"Das Publikum hat folgendermaßen abgestimmt: " + Environment.NewLine +
+                                    @"Antwort 1: " + chance3 + @"%" + Environment.NewLine +
+                                    @"Antwort 2: " + chance1 + @"%" + Environment.NewLine +
+                                    @"Antwort 3: " + chance2 + @"%" + Environment.NewLine +
+                                    @"Antwort 4: " + chanceRight + @"%",
+                        @"Publikumsjoker", MessageBoxButtons.OK);
+                    break;
+            }
         }
     }
 }
