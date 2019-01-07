@@ -35,13 +35,11 @@ namespace WWRK
         private int aktuelleFrageTeam2 = 0;
         private Boolean team2Ausgeschieden = false;
 
-        private int aktuellesTeam;
+        private int aktuellesTeam = 1;
 
         private Form1 form;
 
         private int i, j, k;
-
-        private int _richtigeAntwort;
         
         public FragenManager(Form1 _form)
         {
@@ -130,6 +128,11 @@ namespace WWRK
 
         public void NächsteFrage()
         {
+            form.btnAntwort1.Enabled = true;
+            form.btnAntwort2.Enabled = true;
+            form.btnAntwort3.Enabled = true;
+            form.btnAntwort4.Enabled = true;
+
             //Lokale Variablen
             int[] _positionen = {-1,-1,-1,-1};
             string[] _antworten = new string[4];
@@ -539,8 +542,7 @@ namespace WWRK
             {
                 korrekteAntwortButtonIndex = 4;
             }
-
-            _richtigeAntwort = korrekteAntwortButtonIndex;
+            
             return korrekteAntwortButtonIndex;
         }
 
@@ -560,36 +562,53 @@ namespace WWRK
                 form.btnJoker1Team2.Enabled = false;
             }
 
+            int richtigeAntwort = RichtigeAntwort();
+
             int btn1;
             int btn2;
             do
             {
                 btn1 = der_Zufall.Next(0, 4);
                 btn2 = der_Zufall.Next(0, 4);
-            } while (btn1 != btn2 /*!= richtigeAntwortInt*/);
+            } while (btn1 == richtigeAntwort || btn2 == richtigeAntwort);
 
-            if (btn1 == 1 || btn2 == 1)
+            switch (btn1)
             {
-                form.btnAntwort1.Enabled = false;
+                case 1:
+                    form.btnAntwort1.Enabled = false;
+                    break;
+                case 2:
+                    form.btnAntwort2.Enabled = false;
+                    break;
+                case 3:
+                    form.btnAntwort3.Enabled = false;
+                    break;
+                case 4:
+                    form.btnAntwort4.Enabled = false;
+                    break;
             }
-            else if (btn1 == 2 || btn2 == 2)
-            {
-                form.btnAntwort2.Enabled = false;
-            }
-            else if (btn1 == 3 || btn2 == 3)
-            {
-                form.btnAntwort3.Enabled = false;
-            }
-            else if (btn1 == 4 || btn2 == 4)
-            {
-                form.btnAntwort4.Enabled = false;
-            }
-            
 
+            switch (btn2)
+            {
+                case 1:
+                    form.btnAntwort1.Enabled = false;
+                    break;
+                case 2:
+                    form.btnAntwort2.Enabled = false;
+                    break;
+                case 3:
+                    form.btnAntwort3.Enabled = false;
+                    break;
+                case 4:
+                    form.btnAntwort4.Enabled = false;
+                    break;
+            }
         }
 
         public void PublikumsJoker(int aktuellesTeam)
         {
+            int richtigeAntwort = RichtigeAntwort();
+
             if (this.aktuellesTeam == 1)
             {
                 form.btnJoker2Team1.Enabled = false;
@@ -598,16 +617,14 @@ namespace WWRK
             {
                 form.btnJoker2Team2.Enabled = false;
             }
-
-            int richtigeAntwort = _richtigeAntwort;
-
+            
             int chanceRight = der_Zufall.Next(25, 75);
             int chance1 = der_Zufall.Next(0, (100 - chanceRight + 15));
             int chance2 = der_Zufall.Next(0, (100 - chanceRight + 15));
-            int chance3 = 100 - chanceRight + chance1 + chance2;
+            int chance3 = 100 - (chanceRight + chance1 + chance2);
             if ((chanceRight + chance1 + chance2 + chance3) > 100)
             {
-                int rdm = der_Zufall.Next(0, 3);
+                int rdm = der_Zufall.Next(1, 3);
                 switch (rdm)
                 {
                     case 1:
