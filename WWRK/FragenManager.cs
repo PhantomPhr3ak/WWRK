@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.OleDb;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace WWRK
@@ -510,7 +511,36 @@ namespace WWRK
 
         public int RichtigeAntwort()
         {
-            return 1;
+            Frage _frage;
+            int korrekteAntwortButtonIndex = 0;
+
+            if (aktuellesTeam == 1)
+            {
+                _frage = fragenTeam1[aktuelleFrageTeam1];
+            }
+            else
+            {
+                _frage = fragenTeam2[aktuelleFrageTeam2];
+            }
+
+            if (form.btnAntwort1.Text == _frage.korrekteAntwort)
+            {
+                korrekteAntwortButtonIndex = 1;
+            }
+            else if (form.btnAntwort2.Text == _frage.korrekteAntwort)
+            {
+                korrekteAntwortButtonIndex = 2;
+            }
+            else if (form.btnAntwort3.Text == _frage.korrekteAntwort)
+            {
+                korrekteAntwortButtonIndex = 3;
+            }
+            else if (form.btnAntwort4.Text == _frage.korrekteAntwort)
+            {
+                korrekteAntwortButtonIndex = 4;
+            }
+
+            return korrekteAntwortButtonIndex;
         }
 
         public int GetAktuellesTeam()
