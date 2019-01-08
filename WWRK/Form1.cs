@@ -87,5 +87,24 @@ namespace WWRK
                 MessageBox.Show(@"Ihr Team ist gerade nicht am Zug.", @"Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnNeustarten_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(@"Wollen Sie das Spiel wirklich neustarten?", 
+                @"Neustarten?",
+                MessageBoxButtons.YesNo, 
+                MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                fragenManager.Neustarten();
+            }
+        }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+            MessageBox.Show(@"Zum fortfahren drücken Sie bitte OK.", "",MessageBoxButtons.OK);
+            Visible = true;
+        }
     }
 }

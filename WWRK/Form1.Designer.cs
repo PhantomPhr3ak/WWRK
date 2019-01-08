@@ -41,7 +41,7 @@
             this.btnJoker1Team2 = new System.Windows.Forms.Button();
             this.btnJoker2Team2 = new System.Windows.Forms.Button();
             this.btnNeustarten = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
             this.pBarTeam2 = new System.Windows.Forms.ProgressBar();
             this.pBarTeam1 = new System.Windows.Forms.ProgressBar();
             this.btnJoker1Team1 = new System.Windows.Forms.Button();
@@ -177,16 +177,18 @@
             this.btnNeustarten.TabIndex = 15;
             this.btnNeustarten.Text = "Neustarten";
             this.btnNeustarten.UseVisualStyleBackColor = true;
+            this.btnNeustarten.Click += new System.EventHandler(this.btnNeustarten_Click);
             // 
-            // button1
+            // btnPause
             // 
-            this.button1.Location = new System.Drawing.Point(11, 330);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 27);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Start/Pause";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnPause.Location = new System.Drawing.Point(11, 330);
+            this.btnPause.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(133, 27);
+            this.btnPause.TabIndex = 16;
+            this.btnPause.Text = "Pause";
+            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // pBarTeam2
             // 
@@ -240,7 +242,7 @@
             this.Controls.Add(this.btnJoker1Team1);
             this.Controls.Add(this.pBarTeam1);
             this.Controls.Add(this.pBarTeam2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPause);
             this.Controls.Add(this.btnNeustarten);
             this.Controls.Add(this.btnJoker2Team2);
             this.Controls.Add(this.btnJoker1Team2);
@@ -278,7 +280,7 @@
         public System.Windows.Forms.Button btnJoker1Team2;
         public System.Windows.Forms.Button btnJoker2Team2;
         public System.Windows.Forms.Button btnNeustarten;
-        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button btnPause;
         public System.Windows.Forms.Button btnAntwort3;
         public System.Windows.Forms.Button btnJoker1Team1;
         public System.Windows.Forms.PictureBox pBoxMain;
