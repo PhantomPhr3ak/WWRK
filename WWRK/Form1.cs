@@ -59,14 +59,39 @@ namespace WWRK
             fragenManager.AntwortBestätigen(btnAntwort4.Text);
         }
 
-        private void FiftyFiftyJoker(object sender, EventArgs e)
+
+        private void btnJoker1Team1_Click(object sender, EventArgs e)
         {
+            btnJoker1Team1.Enabled = false;
             fragenManager.FiftyfiftyJoker(aktuellesTeam);
         }
 
-        private void FiftyPublikumsJoker(object sender, EventArgs e)
+        private void btnJoker2Team1_Click(object sender, EventArgs e)
         {
+            btnJoker2Team1.Enabled = false;
             fragenManager.PublikumsJoker(aktuellesTeam);
         }
+
+        private void btnJoker1Team2_Click(object sender, EventArgs e)
+        {
+            btnJoker1Team2.Enabled = false;
+            fragenManager.FiftyfiftyJoker(aktuellesTeam);
+        }
+
+        private void btnJoker2Team2_Click(object sender, EventArgs e)
+        {
+            btnJoker2Team2.Enabled = false;
+            fragenManager.PublikumsJoker(aktuellesTeam);
+        }
+
+        //private void FiftyFiftyJoker(object sender, EventArgs e)
+        //{
+        //    fragenManager.FiftyfiftyJoker(aktuellesTeam);
+        //}
+
+        //private void FiftyPublikumsJoker(object sender, EventArgs e)
+        //{
+        //    fragenManager.PublikumsJoker(aktuellesTeam);
+        //}
     }
 }

@@ -502,6 +502,11 @@ namespace WWRK
             team1Ausgeschieden = false;
             team2Ausgeschieden = false;
 
+            form.btnJoker1Team1.Enabled = true;
+            form.btnJoker1Team2.Enabled = true;
+            form.btnJoker2Team2.Enabled = true;
+            form.btnJoker2Team2.Enabled = true;
+
             aktuelleFrageTeam1 = 0;
             aktuelleFrageTeam2 = 0;
 
@@ -553,15 +558,6 @@ namespace WWRK
 
         public void FiftyfiftyJoker(int aktuellesTeam)
         {
-            if (aktuellesTeam == 1)
-            {
-                form.btnJoker1Team1.Enabled = false;
-            }
-            else
-            {
-                form.btnJoker1Team2.Enabled = false;
-            }
-
             int richtigeAntwort = RichtigeAntwort();
 
             int btn1;
@@ -609,36 +605,51 @@ namespace WWRK
         {
             int richtigeAntwort = RichtigeAntwort();
 
-            if (this.aktuellesTeam == 1)
+            int chanceRight = der_Zufall.Next(20, 75);
+            int restChance = 100 - chanceRight;
+            int chance1 = (restChance / 3) + der_Zufall.Next(-10, 10);
+            int chance2 = (restChance / 3) + der_Zufall.Next(-10, 10);
+            int chance3 = (restChance / 3) + der_Zufall.Next(-10, 10);
+
+            Console.WriteLine(chanceRight);
+            Console.WriteLine(chance1);
+            Console.WriteLine(chance2);
+            Console.WriteLine(chance3);
+
+            while (chance1 + chance2 + chance3 < restChance)
             {
-                form.btnJoker2Team1.Enabled = false;
-            }
-            else
-            {
-                form.btnJoker2Team2.Enabled = false;
-            }
-            
-            int chanceRight = der_Zufall.Next(25, 75);
-            int chance1 = der_Zufall.Next(0, (100 - chanceRight + 15));
-            int chance2 = der_Zufall.Next(0, (100 - chanceRight + 15));
-            int chance3 = 100 - (chanceRight + chance1 + chance2);
-            if ((chanceRight + chance1 + chance2 + chance3) > 100)
-            {
-                int rdm = der_Zufall.Next(1, 3);
-                switch (rdm)
+                int decider = der_Zufall.Next(0, 3);
+                switch (decider)
                 {
                     case 1:
-                        chance1 = chance1 - ((chanceRight + chance1 + chance2 + chance3) - 100);
+                        chance1++;
                         break;
                     case 2:
-                        chance2 = chance2 - ((chanceRight + chance1 + chance2 + chance3) - 100);
+                        chance2++;
                         break;
                     case 3:
-                        chance3 = chance3 - ((chanceRight + chance1 + chance2 + chance3) - 100);
+                        chance3++;
                         break;
                 }
             }
 
+            while (chance1 + chance2 + chance3 > restChance)
+            {
+                int decider = der_Zufall.Next(0, 3);
+                switch (decider)
+                {
+                    case 1:
+                        chance1--;
+                        break;
+                    case 2:
+                        chance2--;
+                        break;
+                    case 3:
+                        chance3--;
+                        break;
+                }
+            }
+            
             switch (richtigeAntwort)
             {
                 case 1:

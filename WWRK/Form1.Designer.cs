@@ -160,7 +160,7 @@
             this.btnJoker1Team1.TabIndex = 10;
             this.btnJoker1Team1.Text = "50:50";
             this.btnJoker1Team1.UseVisualStyleBackColor = true;
-            this.btnJoker1Team1.Click += new System.EventHandler(this.FiftyFiftyJoker);
+            this.btnJoker1Team1.Click += new System.EventHandler(this.btnJoker1Team1_Click);
             // 
             // btnJoker2Team1
             // 
@@ -171,7 +171,7 @@
             this.btnJoker2Team1.TabIndex = 11;
             this.btnJoker2Team1.Text = "Publikumsjoker";
             this.btnJoker2Team1.UseVisualStyleBackColor = true;
-            this.btnJoker2Team1.Click += new System.EventHandler(this.FiftyPublikumsJoker);
+            this.btnJoker2Team1.Click += new System.EventHandler(this.btnJoker2Team1_Click);
             // 
             // btnJoker1Team2
             // 
@@ -182,7 +182,7 @@
             this.btnJoker1Team2.TabIndex = 12;
             this.btnJoker1Team2.Text = "50:50";
             this.btnJoker1Team2.UseVisualStyleBackColor = true;
-            this.btnJoker1Team2.Click += new System.EventHandler(this.FiftyFiftyJoker);
+            this.btnJoker1Team2.Click += new System.EventHandler(this.btnJoker1Team2_Click);
             // 
             // btnJoker2Team2
             // 
@@ -193,7 +193,7 @@
             this.btnJoker2Team2.TabIndex = 13;
             this.btnJoker2Team2.Text = "Publikumsjoker";
             this.btnJoker2Team2.UseVisualStyleBackColor = true;
-            this.btnJoker2Team2.Click += new System.EventHandler(this.FiftyPublikumsJoker);
+            this.btnJoker2Team2.Click += new System.EventHandler(this.btnJoker2Team2_Click);
             // 
             // btnNeustarten
             // 
