@@ -14,7 +14,6 @@ namespace WWRK
     {
         readonly FragenManagerForm _fragenManagerForm = new FragenManagerForm();
         private FragenManager fragenManager;
-        private int aktuellesTeam;
         
         public Form1()
         {
@@ -22,11 +21,6 @@ namespace WWRK
 
             //FragenManager initialisieren (Es werden automatisch Fragen geladen und den Teams zugewiesen.)
             fragenManager = new FragenManager(this);
-        }
-
-        public void AktuellesTeam()
-        {
-            aktuellesTeam = fragenManager.GetAktuellesTeam();
         }
 
         private void btnFragenManager_Click(object sender, EventArgs e)
@@ -62,26 +56,29 @@ namespace WWRK
 
         private void btnJoker1Team1_Click(object sender, EventArgs e)
         {
-            btnJoker1Team1.Enabled = false;
-            fragenManager.FiftyfiftyJoker(aktuellesTeam);
+            if (fragenManager.GetAktuellesTeam() == 1)
+            {
+                btnJoker1Team1.Enabled = false;
+                fragenManager.FiftyfiftyJoker(fragenManager.GetAktuellesTeam());
+            }
         }
 
         private void btnJoker2Team1_Click(object sender, EventArgs e)
         {
             btnJoker2Team1.Enabled = false;
-            fragenManager.PublikumsJoker(aktuellesTeam);
+            fragenManager.PublikumsJoker(fragenManager.GetAktuellesTeam());
         }
 
         private void btnJoker1Team2_Click(object sender, EventArgs e)
         {
             btnJoker1Team2.Enabled = false;
-            fragenManager.FiftyfiftyJoker(aktuellesTeam);
+            fragenManager.FiftyfiftyJoker(fragenManager.GetAktuellesTeam());
         }
 
         private void btnJoker2Team2_Click(object sender, EventArgs e)
         {
             btnJoker2Team2.Enabled = false;
-            fragenManager.PublikumsJoker(aktuellesTeam);
+            fragenManager.PublikumsJoker(fragenManager.GetAktuellesTeam());
         }
 
         //private void FiftyFiftyJoker(object sender, EventArgs e)

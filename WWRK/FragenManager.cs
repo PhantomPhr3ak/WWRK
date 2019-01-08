@@ -562,11 +562,12 @@ namespace WWRK
 
             int btn1;
             int btn2;
+
             do
             {
-                btn1 = der_Zufall.Next(0, 4);
-                btn2 = der_Zufall.Next(0, 4);
-            } while (btn1 == richtigeAntwort || btn2 == richtigeAntwort);
+                btn1 = der_Zufall.Next(1, 4);
+                btn2 = der_Zufall.Next(1, 4);
+            } while (btn1 == richtigeAntwort || btn2 == richtigeAntwort || btn1 == btn2);
 
             switch (btn1)
             {
@@ -605,11 +606,11 @@ namespace WWRK
         {
             int richtigeAntwort = RichtigeAntwort();
 
-            int chanceRight = der_Zufall.Next(20, 75);
+            int chanceRight = der_Zufall.Next(10, 75);
             int restChance = 100 - chanceRight;
-            int chance1 = (restChance / 3) + der_Zufall.Next(-10, 10);
-            int chance2 = (restChance / 3) + der_Zufall.Next(-10, 10);
-            int chance3 = (restChance / 3) + der_Zufall.Next(-10, 10);
+            int chance1 = (restChance / 3) + der_Zufall.Next(-der_Zufall.Next(0, 20), der_Zufall.Next(0, 20));
+            int chance2 = (restChance / 3) + der_Zufall.Next(-der_Zufall.Next(0, 20), der_Zufall.Next(0, 20));
+            int chance3 = (restChance / 3) + der_Zufall.Next(-der_Zufall.Next(0, 20), der_Zufall.Next(0, 20));
 
             Console.WriteLine(chanceRight);
             Console.WriteLine(chance1);
