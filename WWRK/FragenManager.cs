@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.OleDb;
 using System.Drawing;
-using System.Globalization;
+using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace WWRK
@@ -15,56 +13,55 @@ namespace WWRK
     {
         //https://docs.microsoft.com/de-de/dotnet/framework/data/adonet/populating-a-dataset-from-a-dataadapter
         //Datenbank sachen
-        OleDbConnection db_connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=Adressen.mdb");
-        private OleDbDataAdapter db_adapter;
-        private OleDbCommand db_command;
-        private DataSet alleFragenDataSet;
+        private readonly OleDbConnection _dbConnection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=Adressen.mdb");
+        private OleDbDataAdapter _dbAdapter;
+        private DataSet _alleFragenDataSet;
         
         //Fragen und Antworten
-        private Frage[] fragenTeam1 = new Frage[5];
-        private Frage[] fragenTeam2 = new Frage[5];
+        private readonly Frage[] _fragenTeam1 = new Frage[5];
+        private readonly Frage[] _fragenTeam2 = new Frage[5];
         //private Frage[] alleFragen = new Frage[10000];
 
-        private List<Frage> alleFragenList = new List<Frage>(0);
+        private readonly List<Frage> _alleFragenList = new List<Frage>(0);
 
-        Random der_Zufall = new Random();
+        private readonly Random _derZufall = new Random();
 
-        private int aktuelleFrageTeam1 = 0;
-        private Boolean team1Ausgeschieden = false;
+        private int _aktuelleFrageTeam1;
+        private bool _team1Ausgeschieden;
 
-        private int aktuelleFrageTeam2 = 0;
-        private Boolean team2Ausgeschieden = false;
+        private int _aktuelleFrageTeam2;
+        private bool _team2Ausgeschieden;
 
-        private int aktuellesTeam = 1;
+        private int _aktuellesTeam = 1;
 
-        private Form1 form;
+        private readonly Form1 _form;
 
-        private int i, j, k;
+        private int _i;
         
-        public FragenManager(Form1 _form)
+        public FragenManager(Form1 form)
         {
-            form = _form;
+            _form = form;
             
             Neustarten();
         }
 
         public void AlleFragenLaden()
         {
-            alleFragenDataSet = new DataSet();
+            _alleFragenDataSet = new DataSet();
 
             //Daten aus DB laden
-            db_adapter = new OleDbDataAdapter("SELECT * FROM Fragen", db_connection);
-            db_adapter.Fill(alleFragenDataSet, "Fragen");
+            _dbAdapter = new OleDbDataAdapter("SELECT * FROM Fragen", _dbConnection);
+            _dbAdapter.Fill(_alleFragenDataSet, "Fragen");
 
             //Fragen vom DataSet ins Array
-            if (alleFragenDataSet != null)
+            if (_alleFragenDataSet != null)
             {
-                i = 0;
+                _i = 0;
 
-                foreach (DataRow row in alleFragenDataSet.Tables["Fragen"].Rows)
+                foreach (DataRow row in _alleFragenDataSet.Tables["Fragen"].Rows)
                 {
                     //Einzelne Frage-Objekte befüllen
-                    Frage _frage = new Frage(
+                    Frage frage = new Frage(
                         row["Frage"].ToString(),
                         row["Antwort1"].ToString(),
                         row["Antwort2"].ToString(),
@@ -73,54 +70,53 @@ namespace WWRK
 
                     //Frage ins Array einfügen
                     //alleFragen[i] = _frage;
-                    alleFragenList.Add(_frage);
+                    _alleFragenList.Add(frage);
 
                     //Counter erhöhen
-                    i++;
+                    _i++;
                 }
             }
         }
 
         public void FragenAuswählen()
         {
-            int random;
-
             //Wenn genug Fragen für eine Runde vorhanden sind, wähle für jedes Team 5 Fragen zufällig aus
-            if (!(alleFragenList.Count < 10))
+            if (!(_alleFragenList.Count < 10))
             {
-                i = 0;
+                _i = 0;
 
                 //Team 1
-                while (i < 5)
+                int random;
+                while (_i < 5)
                 {
                     //Zufallszahl bestimmen
-                    random = der_Zufall.Next(0, alleFragenList.Count);
+                    random = _derZufall.Next(0, _alleFragenList.Count);
                     
                     //Prüfen, ob die zufällig ausgewählte Frage bereits zugewiesen ist, wenn nein dann:
                     //weise die Frage dem Team zu,
                     //erhöhe den Counter, sodass die nächste Frage zugewiesen wird.
-                    if (!fragenTeam1.Contains(alleFragenList[random]) && !fragenTeam2.Contains(alleFragenList[random]))
+                    if (!_fragenTeam1.Contains(_alleFragenList[random]) && !_fragenTeam2.Contains(_alleFragenList[random]))
                     {
-                        fragenTeam1[i] = alleFragenList[random];
-                        i++;
+                        _fragenTeam1[_i] = _alleFragenList[random];
+                        _i++;
                     }
                 }
 
-                i = 0;
+                _i = 0;
                 
                 //Team 2
-                while (i < 5)
+                while (_i < 5)
                 {
                     //Zufallszahl bestimmen
-                    random = der_Zufall.Next(0, alleFragenList.Count);
+                    random = _derZufall.Next(0, _alleFragenList.Count);
 
                     //Prüfen, ob die zufällig ausgewählte Frage bereits zugewiesen ist, wenn nein dann:
                     //      weise die Frage dem Team zu,
                     //      erhöhe den Counter, sodass die nächste Frage zugewiesen wird.
-                    if (!fragenTeam1.Contains(alleFragenList[random]) && !fragenTeam2.Contains(alleFragenList[random]))
+                    if (!_fragenTeam1.Contains(_alleFragenList[random]) && !_fragenTeam2.Contains(_alleFragenList[random]))
                     {
-                        fragenTeam2[i] = alleFragenList[random];
-                        i++;
+                        _fragenTeam2[_i] = _alleFragenList[random];
+                        _i++;
                     }
                 }
             }
@@ -128,103 +124,116 @@ namespace WWRK
 
         public void NächsteFrage()
         {
-            form.btnAntwort1.Enabled = true;
-            form.btnAntwort2.Enabled = true;
-            form.btnAntwort3.Enabled = true;
-            form.btnAntwort4.Enabled = true;
+            _form.btnAntwort1.Enabled = true;
+            _form.btnAntwort2.Enabled = true;
+            _form.btnAntwort3.Enabled = true;
+            _form.btnAntwort4.Enabled = true;
 
             //Lokale Variablen
-            int[] _positionen = {-1,-1,-1,-1};
-            string[] _antworten = new string[4];
-            Frage _frage = new Frage("","","","","");
+            int[] positionen = {-1,-1,-1,-1};
+            string[] antworten = new string[4];
+            Frage frage = new Frage("","","","","");
 
-            i = 0;
+            _i = 0;
 
             //Die Positionen für die Antworten zufällig bestimmen
-            while (i < 4)
+            while (_i < 4)
             {
-                int _random = der_Zufall.Next( 0, 4);
-                if (!_positionen.Contains(_random))
+                int random = _derZufall.Next( 0, 4);
+                if (!positionen.Contains(random))
                 {
-                    _positionen[i] = _random;
-                    i++;
+                    positionen[_i] = random;
+                    _i++;
                 }
             }
 
-            if (aktuellesTeam == 1 && !team1Ausgeschieden)
+            if (_aktuellesTeam == 1 && !_team1Ausgeschieden)
             {
                 //Aktuelle Frage laden
-                _frage = fragenTeam1[aktuelleFrageTeam1];
-                form.lblFrage.Text = _frage.frage;
+                frage = _fragenTeam1[_aktuelleFrageTeam1];
+                _form.lblFrage.Text = frage.frage;
             }
-            else if (aktuellesTeam == 2 && !team2Ausgeschieden)
+            else if (_aktuellesTeam == 2 && !_team2Ausgeschieden)
             {
                 //Aktuelle Frage laden
-                _frage = fragenTeam2[aktuelleFrageTeam2];
-                form.lblFrage.Text = _frage.frage;
+                frage = _fragenTeam2[_aktuelleFrageTeam2];
+                _form.lblFrage.Text = frage.frage;
             }
 
             //Anzeige welches Team dran ist
-            form.lblAktuellesTeam.Text = "Aktuelles Team: " + aktuellesTeam.ToString();
+            //_form.lblAktuellesTeam.Text = @"Aktuelles Team: " + _aktuellesTeam;
+            switch (_aktuellesTeam)
+            {
+                case 1:
+                    _form.pBoxMain.BackgroundImage = Properties.Resources.pfeilrtl;
+                    break;
+                case 2:
+                    _form.pBoxMain.BackgroundImage = Properties.Resources.pfeil;
+                    break;
+            }
+            
+
 
             //Antworten in Array speichern
-            _antworten[0] = _frage.korrekteAntwort;
-            _antworten[1] = _frage.antwort1;
-            _antworten[2] = _frage.antwort2;
-            _antworten[3] = _frage.antwort3;
+            antworten[0] = frage.KorrekteAntwort;
+            antworten[1] = frage.Antwort1;
+            antworten[2] = frage.Antwort2;
+            antworten[3] = frage.Antwort3;
 
             //Antworten auf Buttons anzeigen
-            form.btnAntwort1.Text = _antworten[_positionen[0]];
-            form.btnAntwort2.Text = _antworten[_positionen[1]];
-            form.btnAntwort3.Text = _antworten[_positionen[2]];
-            form.btnAntwort4.Text = _antworten[_positionen[3]];
+            _form.btnAntwort1.Text = antworten[positionen[0]];
+            _form.btnAntwort2.Text = antworten[positionen[1]];
+            _form.btnAntwort3.Text = antworten[positionen[2]];
+            _form.btnAntwort4.Text = antworten[positionen[3]];
         }
-
+        
         public void AntwortBestätigen(string ausgewählteAntwort)
         {
-            if (aktuellesTeam == 1)
+            if (_aktuellesTeam == 1)
             {
                 //aktuelle Frage laden
-                Frage _frage = fragenTeam1[aktuelleFrageTeam1];
-                
+                Frage frage = _fragenTeam1[_aktuelleFrageTeam1];
+
                 //Überprüfen, ob richtige Antwort ausgewählt wurde
-                if (ausgewählteAntwort == _frage.korrekteAntwort)
+                if (ausgewählteAntwort == frage.KorrekteAntwort)
                 {
                     //Grafik effekt
-                    form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
-                    System.Threading.Thread.Sleep(1000);
-                    form.btnAntwortBestätigen.BackColor = Color.LightGray;
+                    _form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
+                    Thread.Sleep(1000);
+                    _form.btnAntwortBestätigen.BackColor = Color.LightGray;
 
                     //Fragen-Zähler erhöhen
-                    aktuelleFrageTeam1++;
+                    _aktuelleFrageTeam1++;
+                    _form.pBarTeam1.Value++;
                 }
                 else
                 {
                     //Team ausscheiden lassen
-                    team1Ausgeschieden = true;
+                    _team1Ausgeschieden = true;
                 }
             }
-            else if (aktuellesTeam == 2)
+            else if (_aktuellesTeam == 2)
             {
                 //aktuelle Frage laden
-                Frage _frage = fragenTeam2[aktuelleFrageTeam2];
+                Frage frage = _fragenTeam2[_aktuelleFrageTeam2];
 
 
                 //Überprüfen, ob richtige Antwort ausgewählt wurde
-                if (ausgewählteAntwort == _frage.korrekteAntwort)
+                if (ausgewählteAntwort == frage.KorrekteAntwort)
                 {
                     //Grafik effekt
-                    form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
-                    System.Threading.Thread.Sleep(1000);
-                    form.btnAntwortBestätigen.BackColor = Color.LightGray;
+                    _form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
+                    Thread.Sleep(1000);
+                    _form.btnAntwortBestätigen.BackColor = Color.LightGray;
 
                     //Fragen-Zähler erhöhen
-                    aktuelleFrageTeam2++;
+                    _aktuelleFrageTeam2++;
+                    _form.pBarTeam2.Value++;
                 }
                 else
                 {
                     //Team ausscheiden lassen
-                    team2Ausgeschieden = true;
+                    _team2Ausgeschieden = true;
                 }
             }
 
@@ -316,201 +325,186 @@ namespace WWRK
 
             #endregion
 
-            if (aktuelleFrageTeam1 == 5 && aktuelleFrageTeam2 == 5 && team1Ausgeschieden == false &&
-                team2Ausgeschieden == false)
+            if (_aktuelleFrageTeam1 == 5 && _aktuelleFrageTeam2 == 5 && _team1Ausgeschieden == false &&
+                _team2Ausgeschieden == false)
             {
                 //  -   Unentschieden
 
                 MessageBox.Show(
-                    "Unentschieden \nBeide Teams haben gleich viele Fragen richtig beantwortet.",
-                    "Spiel beendet!",
+                    @"Unentschieden Beide Teams haben gleich viele Fragen richtig beantwortet.",
+                    @"Spiel beendet!",
                     MessageBoxButtons.OK);
 
                 Neustarten();
             }
-            else if(aktuelleFrageTeam1 == 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
-                    team2Ausgeschieden == true)
+            else if (_aktuelleFrageTeam1 == 5 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden == false &&
+                    _team2Ausgeschieden)
             {
                 //  -   Team 1 gewinnt
 
                 MessageBox.Show(
-                    "Team 1 hat gewonnen",
-                    "Spiel beendet!",
+                    @"Team 1 hat gewonnen",
+                    @"Spiel beendet!",
                     MessageBoxButtons.OK);
 
                 Neustarten();
             }
-            else if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 == 5 && team1Ausgeschieden == true &&
-                     team2Ausgeschieden == false)
+            else if (_aktuelleFrageTeam1 < 5 && _aktuelleFrageTeam2 == 5 && _team1Ausgeschieden &&
+                     _team2Ausgeschieden == false)
             {
                 //  -   Team 2 gewinnt
 
                 MessageBox.Show(
-                    "Team 2 hat gewonnen",
-                    "Spiel beendet!",
+                    @"Team 2 hat gewonnen",
+                    @"Spiel beendet!",
                     MessageBoxButtons.OK);
 
                 Neustarten();
             }
-            else if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
-                     team2Ausgeschieden == false)
+            else if (_aktuelleFrageTeam1 < 5 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden == false &&
+                     _team2Ausgeschieden == false)
             {
                 //  -   Spiel geht normal weiter
 
-                if (aktuellesTeam == 1)
-                {
-                    aktuellesTeam = 2;
-                }
-                else
-                {
-                    aktuellesTeam = 1;
-                }
+                _aktuellesTeam = _aktuellesTeam == 1 ? 2 : 1;
 
                 NächsteFrage();
             }
-            else if (aktuelleFrageTeam1 == 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
-                     team2Ausgeschieden == false)
+            else if (_aktuelleFrageTeam1 == 5 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden == false &&
+                     _team2Ausgeschieden == false)
             {
                 //  -   Spiel geht normal weiter !
 
-                if (aktuellesTeam == 1)
-                {
-                    aktuellesTeam = 2;
-                }
-                else
-                {
-                    aktuellesTeam = 1;
-                }
+                _aktuellesTeam = _aktuellesTeam == 1 ? 2 : 1;
 
                 NächsteFrage();
             }
-            else if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 == 5 && team1Ausgeschieden == false &&
-                     team2Ausgeschieden == false)
+            else if (_aktuelleFrageTeam1 < 5 && _aktuelleFrageTeam2 == 5 && _team1Ausgeschieden == false &&
+                     _team2Ausgeschieden == false)
             {
                 //  -   Spiel geht normal weiter !
 
-                if (aktuellesTeam == 1)
-                {
-                    aktuellesTeam = 2;
-                }
-                else
-                {
-                    aktuellesTeam = 1;
-                }
+                _aktuellesTeam = _aktuellesTeam == 1 ? 2 : 1;
 
                 NächsteFrage();
             }
-            else if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == true &&
-                     team2Ausgeschieden == false)
+            else if (_aktuelleFrageTeam1 < 5 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden &&
+                     _team2Ausgeschieden == false)
             {
                 //  -   Team 2 darf weiter spielen
 
-                if (aktuellesTeam == 1)
+                if (_aktuellesTeam == 1)
                 {
-                    aktuellesTeam = 2;
+                    _aktuellesTeam = 2;
                 }
-                
+
                 NächsteFrage();
             }
-            else if (aktuelleFrageTeam1 < 5 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == false &&
-                     team2Ausgeschieden == true)
+            else if (_aktuelleFrageTeam1 < 5 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden == false &&
+                     _team2Ausgeschieden)
             {
                 //  -   Team 1 darf weiter spielen
 
-                if (aktuellesTeam == 2)
+                if (_aktuellesTeam == 2)
                 {
-                    aktuellesTeam = 1;
+                    _aktuellesTeam = 1;
                 }
 
                 NächsteFrage();
             }
-            else if (aktuelleFrageTeam1 < aktuelleFrageTeam2 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == true &&
-                     team2Ausgeschieden == false)
+            else if (_aktuelleFrageTeam1 < _aktuelleFrageTeam2 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden &&
+                     _team2Ausgeschieden == false)
             {
                 //  -   Team 2 darf weiter spielen
 
-                if (aktuellesTeam == 1)
+                if (_aktuellesTeam == 1)
                 {
-                    aktuellesTeam = 2;
+                    _aktuellesTeam = 2;
                 }
 
                 NächsteFrage();
             }
-            else if (aktuelleFrageTeam2 < aktuelleFrageTeam1 && aktuelleFrageTeam1 < 5 && team1Ausgeschieden == false &&
-                     team2Ausgeschieden == true)
+            else if (_aktuelleFrageTeam2 < _aktuelleFrageTeam1 && _aktuelleFrageTeam1 < 5 && _team1Ausgeschieden == false &&
+                     _team2Ausgeschieden)
             {
                 //  -   Team 1 darf weiter spielen
 
-                if (aktuellesTeam == 2)
+                if (_aktuellesTeam == 2)
                 {
-                    aktuellesTeam = 1;
+                    _aktuellesTeam = 1;
                 }
 
                 NächsteFrage();
             }
-            else if (aktuelleFrageTeam2 < aktuelleFrageTeam1 && aktuelleFrageTeam1 < 5 && team1Ausgeschieden == true &&
-                     team2Ausgeschieden == true)
+            else if (_aktuelleFrageTeam2 < _aktuelleFrageTeam1 && _aktuelleFrageTeam1 < 5 && _team1Ausgeschieden &&
+                     _team2Ausgeschieden)
             {
                 //  -   Team 1 gewinnt
 
                 MessageBox.Show(
-                    "Team 1 hat gewonnen",
-                    "Spiel beendet!",
+                    @"Team 1 hat gewonnen",
+                    @"Spiel beendet!",
                     MessageBoxButtons.OK);
 
                 Neustarten();
             }
-            else if (aktuelleFrageTeam1 < aktuelleFrageTeam2 && aktuelleFrageTeam2 < 5 && team1Ausgeschieden == true &&
-                     team2Ausgeschieden == true)
+            else if (_aktuelleFrageTeam1 < _aktuelleFrageTeam2 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden &&
+                     _team2Ausgeschieden)
             {
                 //  -   Team 2 gewinnt
 
                 MessageBox.Show(
-                    "Team 2 hat gewonnen",
-                    "Spiel beendet!",
+                    @"Team 2 hat gewonnen",
+                    @"Spiel beendet!",
                     MessageBoxButtons.OK);
 
                 Neustarten();
             }
-            else if (aktuelleFrageTeam1 == aktuelleFrageTeam2 && team1Ausgeschieden == true && team2Ausgeschieden == true)
+            else if (_aktuelleFrageTeam1 == _aktuelleFrageTeam2 && _team1Ausgeschieden && _team2Ausgeschieden)
             {
                 //  -   Unentschieden
 
                 MessageBox.Show(
-                    "Unentschieden \nBeide Teams haben gleich viele Fragen richtig beantwortet.",
-                    "Spiel beendet!",
+                    @"Unentschieden Beide Teams haben gleich viele Fragen richtig beantwortet.",
+                    @"Spiel beendet!",
                     MessageBoxButtons.OK);
 
                 Neustarten();
             }
             else
             {
-                MessageBox.Show(
-                    "Unerwartetes Verhalten! Runde wird neugestartet!",
-                    "Fehler!",
-                    MessageBoxButtons.OK);
-
+                DialogResult result = MessageBox.Show(@"Unerwartetes Fehlverhalten! \n Diese Runde wird neugestartet!",
+                                                      @"Fehler!",
+                                                      MessageBoxButtons.YesNo);
+                if (result != DialogResult.Yes)
+                {
+                    MessageBox.Show(@"Doch es gab einen Fehler.",
+                        @"Fehler",
+                        MessageBoxButtons.OK);
+                }
                 Neustarten();
             }
-
 
             //TODO: Endbedingung einfügen!!! (Nach der 5. Frage; Wenn beide Teams versagen)
         }
 
         public void Neustarten()
         {
-            team1Ausgeschieden = false;
-            team2Ausgeschieden = false;
+            _team1Ausgeschieden = false;
+            _team2Ausgeschieden = false;
 
-            form.btnJoker1Team1.Enabled = true;
-            form.btnJoker1Team2.Enabled = true;
-            form.btnJoker2Team2.Enabled = true;
-            form.btnJoker2Team2.Enabled = true;
+            _form.btnJoker1Team1.Enabled = true;
+            _form.btnJoker1Team2.Enabled = true;
+            _form.btnJoker2Team2.Enabled = true;
+            _form.btnJoker2Team2.Enabled = true;
 
-            aktuelleFrageTeam1 = 0;
-            aktuelleFrageTeam2 = 0;
+            _form.pBarTeam1.Value = 0;
+            _form.pBarTeam2.Value = 0;
 
-            aktuellesTeam = 1;
+            _aktuelleFrageTeam1 = 0;
+            _aktuelleFrageTeam2 = 0;
+
+            _aktuellesTeam = 1;
 
             AlleFragenLaden();
             FragenAuswählen();
@@ -519,31 +513,23 @@ namespace WWRK
 
         public int RichtigeAntwort()
         {
-            Frage _frage;
             int korrekteAntwortButtonIndex = 0;
 
-            if (aktuellesTeam == 1)
-            {
-                _frage = fragenTeam1[aktuelleFrageTeam1];
-            }
-            else
-            {
-                _frage = fragenTeam2[aktuelleFrageTeam2];
-            }
+            var frage = _aktuellesTeam == 1 ? _fragenTeam1[_aktuelleFrageTeam1] : _fragenTeam2[_aktuelleFrageTeam2];
 
-            if (form.btnAntwort1.Text == _frage.korrekteAntwort)
+            if (_form.btnAntwort1.Text == frage.KorrekteAntwort)
             {
                 korrekteAntwortButtonIndex = 1;
             }
-            else if (form.btnAntwort2.Text == _frage.korrekteAntwort)
+            else if (_form.btnAntwort2.Text == frage.KorrekteAntwort)
             {
                 korrekteAntwortButtonIndex = 2;
             }
-            else if (form.btnAntwort3.Text == _frage.korrekteAntwort)
+            else if (_form.btnAntwort3.Text == frage.KorrekteAntwort)
             {
                 korrekteAntwortButtonIndex = 3;
             }
-            else if (form.btnAntwort4.Text == _frage.korrekteAntwort)
+            else if (_form.btnAntwort4.Text == frage.KorrekteAntwort)
             {
                 korrekteAntwortButtonIndex = 4;
             }
@@ -553,7 +539,7 @@ namespace WWRK
 
         public int GetAktuellesTeam()
         {
-            return aktuellesTeam;
+            return _aktuellesTeam;
         }
 
         public void FiftyfiftyJoker(int aktuellesTeam)
@@ -565,39 +551,39 @@ namespace WWRK
 
             do
             {
-                btn1 = der_Zufall.Next(1, 4);
-                btn2 = der_Zufall.Next(1, 4);
+                btn1 = _derZufall.Next(1, 4);
+                btn2 = _derZufall.Next(1, 4);
             } while (btn1 == richtigeAntwort || btn2 == richtigeAntwort || btn1 == btn2);
 
             switch (btn1)
             {
                 case 1:
-                    form.btnAntwort1.Enabled = false;
+                    _form.btnAntwort1.Enabled = false;
                     break;
                 case 2:
-                    form.btnAntwort2.Enabled = false;
+                    _form.btnAntwort2.Enabled = false;
                     break;
                 case 3:
-                    form.btnAntwort3.Enabled = false;
+                    _form.btnAntwort3.Enabled = false;
                     break;
                 case 4:
-                    form.btnAntwort4.Enabled = false;
+                    _form.btnAntwort4.Enabled = false;
                     break;
             }
 
             switch (btn2)
             {
                 case 1:
-                    form.btnAntwort1.Enabled = false;
+                    _form.btnAntwort1.Enabled = false;
                     break;
                 case 2:
-                    form.btnAntwort2.Enabled = false;
+                    _form.btnAntwort2.Enabled = false;
                     break;
                 case 3:
-                    form.btnAntwort3.Enabled = false;
+                    _form.btnAntwort3.Enabled = false;
                     break;
                 case 4:
-                    form.btnAntwort4.Enabled = false;
+                    _form.btnAntwort4.Enabled = false;
                     break;
             }
         }
@@ -606,11 +592,11 @@ namespace WWRK
         {
             int richtigeAntwort = RichtigeAntwort();
 
-            int chanceRight = der_Zufall.Next(10, 75);
+            int chanceRight = _derZufall.Next(_derZufall.Next(5, 15), _derZufall.Next(60, 90));
             int restChance = 100 - chanceRight;
-            int chance1 = (restChance / 3) + der_Zufall.Next(-der_Zufall.Next(0, 20), der_Zufall.Next(0, 20));
-            int chance2 = (restChance / 3) + der_Zufall.Next(-der_Zufall.Next(0, 20), der_Zufall.Next(0, 20));
-            int chance3 = (restChance / 3) + der_Zufall.Next(-der_Zufall.Next(0, 20), der_Zufall.Next(0, 20));
+            int chance1 = (restChance / 3) + _derZufall.Next(-_derZufall.Next(0, 20), _derZufall.Next(0, 20));
+            int chance2 = (restChance / 3) + _derZufall.Next(-_derZufall.Next(0, 20), _derZufall.Next(0, 20));
+            int chance3 = (restChance / 3) + _derZufall.Next(-_derZufall.Next(0, 20), _derZufall.Next(0, 20));
 
             Console.WriteLine(chanceRight);
             Console.WriteLine(chance1);
@@ -619,7 +605,7 @@ namespace WWRK
 
             while (chance1 + chance2 + chance3 < restChance)
             {
-                int decider = der_Zufall.Next(0, 3);
+                int decider = _derZufall.Next(0, 3);
                 switch (decider)
                 {
                     case 1:
@@ -636,7 +622,7 @@ namespace WWRK
 
             while (chance1 + chance2 + chance3 > restChance)
             {
-                int decider = der_Zufall.Next(0, 3);
+                int decider = _derZufall.Next(0, 3);
                 switch (decider)
                 {
                     case 1:

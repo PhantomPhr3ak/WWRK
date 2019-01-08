@@ -80,6 +80,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="AdressenDataSet.xsc">
       <DependentUpon>AdressenDataSet.xsd</DependentUpon>
@@ -109,6 +110,9 @@
     <Content Include="Adressen.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\pfeilrtl.jpg" />
+    <None Include="Resources\pfeil.jpg" />
+    <None Include="Resources\pfeil.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
