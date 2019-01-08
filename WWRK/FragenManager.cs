@@ -161,14 +161,15 @@ namespace WWRK
             }
 
             //Anzeige welches Team dran ist
-            //_form.lblAktuellesTeam.Text = @"Aktuelles Team: " + _aktuellesTeam;
             switch (_aktuellesTeam)
             {
                 case 1:
-                    _form.pBoxMain.BackgroundImage = Properties.Resources.pfeilrtl;
+                    _form.lblTeam1Name.ForeColor = Color.Black;
+                    _form.lblTeam2Name.ForeColor = Color.Gray;
                     break;
                 case 2:
-                    _form.pBoxMain.BackgroundImage = Properties.Resources.pfeil;
+                    _form.lblTeam1Name.ForeColor = Color.Gray;
+                    _form.lblTeam2Name.ForeColor = Color.Black;
                     break;
             }
             
@@ -198,9 +199,9 @@ namespace WWRK
                 if (ausgewählteAntwort == frage.KorrekteAntwort)
                 {
                     //Grafik effekt
-                    _form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
+                    //_form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
                     Thread.Sleep(1000);
-                    _form.btnAntwortBestätigen.BackColor = Color.LightGray;
+                    //_form.btnAntwortBestätigen.BackColor = Color.LightGray;
 
                     //Fragen-Zähler erhöhen
                     _aktuelleFrageTeam1++;
@@ -222,9 +223,9 @@ namespace WWRK
                 if (ausgewählteAntwort == frage.KorrekteAntwort)
                 {
                     //Grafik effekt
-                    _form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
+                    //_form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
                     Thread.Sleep(1000);
-                    _form.btnAntwortBestätigen.BackColor = Color.LightGray;
+                    //_form.btnAntwortBestätigen.BackColor = Color.LightGray;
 
                     //Fragen-Zähler erhöhen
                     _aktuelleFrageTeam2++;
@@ -594,9 +595,9 @@ namespace WWRK
 
             int chanceRight = _derZufall.Next(_derZufall.Next(5, 15), _derZufall.Next(60, 90));
             int restChance = 100 - chanceRight;
-            int chance1 = (restChance / 3) + _derZufall.Next(-_derZufall.Next(0, 20), _derZufall.Next(0, 20));
-            int chance2 = (restChance / 3) + _derZufall.Next(-_derZufall.Next(0, 20), _derZufall.Next(0, 20));
-            int chance3 = (restChance / 3) + _derZufall.Next(-_derZufall.Next(0, 20), _derZufall.Next(0, 20));
+            int chance1 = (restChance / 3) + _derZufall.Next(-_derZufall.Next(0, 20), _derZufall.Next(1, 20));
+            int chance2 = (restChance / 3) + _derZufall.Next(-_derZufall.Next(0, 20), _derZufall.Next(1, 20));
+            int chance3 = (restChance / 3) + _derZufall.Next(-_derZufall.Next(0, 20), _derZufall.Next(1, 20));
 
             Console.WriteLine(chanceRight);
             Console.WriteLine(chance1);

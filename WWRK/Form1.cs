@@ -16,11 +16,6 @@ namespace WWRK
             fragenManager = new FragenManager(this);
         }
 
-        private void btnAntwortBestätigen_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnAntwort1_Click(object sender, EventArgs e)
         {
             fragenManager.AntwortBestätigen(btnAntwort1.Text);

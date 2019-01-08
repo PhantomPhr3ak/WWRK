@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnAntwort1 = new System.Windows.Forms.Button();
             this.btnAntwort2 = new System.Windows.Forms.Button();
             this.btnAntwort3 = new System.Windows.Forms.Button();
             this.btnAntwort4 = new System.Windows.Forms.Button();
-            this.btnAntwortBestätigen = new System.Windows.Forms.Button();
             this.lblTeam1Name = new System.Windows.Forms.Label();
             this.lblTeam2Name = new System.Windows.Forms.Label();
             this.lblFrage = new System.Windows.Forms.Label();
@@ -45,8 +43,6 @@
             this.pBarTeam2 = new System.Windows.Forms.ProgressBar();
             this.pBarTeam1 = new System.Windows.Forms.ProgressBar();
             this.btnJoker1Team1 = new System.Windows.Forms.Button();
-            this.pBoxMain = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxMain)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAntwort1
@@ -92,22 +88,11 @@
             this.btnAntwort4.Text = "Antwort 4";
             this.btnAntwort4.UseVisualStyleBackColor = true;
             // 
-            // btnAntwortBestätigen
-            // 
-            this.btnAntwortBestätigen.Location = new System.Drawing.Point(283, 358);
-            this.btnAntwortBestätigen.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAntwortBestätigen.Name = "btnAntwortBestätigen";
-            this.btnAntwortBestätigen.Size = new System.Drawing.Size(295, 50);
-            this.btnAntwortBestätigen.TabIndex = 4;
-            this.btnAntwortBestätigen.Text = "Bestätigen";
-            this.btnAntwortBestätigen.UseVisualStyleBackColor = true;
-            this.btnAntwortBestätigen.Click += new System.EventHandler(this.btnAntwortBestätigen_Click);
-            // 
             // lblTeam1Name
             // 
             this.lblTeam1Name.AutoSize = true;
             this.lblTeam1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.lblTeam1Name.Location = new System.Drawing.Point(51, 9);
+            this.lblTeam1Name.Location = new System.Drawing.Point(51, 22);
             this.lblTeam1Name.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTeam1Name.Name = "lblTeam1Name";
             this.lblTeam1Name.Size = new System.Drawing.Size(132, 39);
@@ -117,11 +102,11 @@
             // lblTeam2Name
             // 
             this.lblTeam2Name.AutoSize = true;
-            this.lblTeam2Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.lblTeam2Name.Location = new System.Drawing.Point(668, 9);
+            this.lblTeam2Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTeam2Name.Location = new System.Drawing.Point(668, 22);
             this.lblTeam2Name.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTeam2Name.Name = "lblTeam2Name";
-            this.lblTeam2Name.Size = new System.Drawing.Size(132, 39);
+            this.lblTeam2Name.Size = new System.Drawing.Size(127, 38);
             this.lblTeam2Name.TabIndex = 6;
             this.lblTeam2Name.Text = "Team 2";
             // 
@@ -137,7 +122,7 @@
             // 
             // btnJoker2Team1
             // 
-            this.btnJoker2Team1.Location = new System.Drawing.Point(58, 106);
+            this.btnJoker2Team1.Location = new System.Drawing.Point(58, 140);
             this.btnJoker2Team1.Margin = new System.Windows.Forms.Padding(2);
             this.btnJoker2Team1.Name = "btnJoker2Team1";
             this.btnJoker2Team1.Size = new System.Drawing.Size(125, 50);
@@ -148,7 +133,7 @@
             // 
             // btnJoker1Team2
             // 
-            this.btnJoker1Team2.Location = new System.Drawing.Point(676, 50);
+            this.btnJoker1Team2.Location = new System.Drawing.Point(676, 84);
             this.btnJoker1Team2.Margin = new System.Windows.Forms.Padding(2);
             this.btnJoker1Team2.Name = "btnJoker1Team2";
             this.btnJoker1Team2.Size = new System.Drawing.Size(125, 50);
@@ -159,7 +144,7 @@
             // 
             // btnJoker2Team2
             // 
-            this.btnJoker2Team2.Location = new System.Drawing.Point(676, 104);
+            this.btnJoker2Team2.Location = new System.Drawing.Point(676, 138);
             this.btnJoker2Team2.Margin = new System.Windows.Forms.Padding(2);
             this.btnJoker2Team2.Name = "btnJoker2Team2";
             this.btnJoker2Team2.Size = new System.Drawing.Size(125, 50);
@@ -193,7 +178,7 @@
             // pBarTeam2
             // 
             this.pBarTeam2.BackColor = System.Drawing.SystemColors.Control;
-            this.pBarTeam2.Location = new System.Drawing.Point(676, 159);
+            this.pBarTeam2.Location = new System.Drawing.Point(676, 193);
             this.pBarTeam2.Maximum = 5;
             this.pBarTeam2.Name = "pBarTeam2";
             this.pBarTeam2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -204,7 +189,7 @@
             // 
             // pBarTeam1
             // 
-            this.pBarTeam1.Location = new System.Drawing.Point(58, 161);
+            this.pBarTeam1.Location = new System.Drawing.Point(58, 195);
             this.pBarTeam1.Maximum = 5;
             this.pBarTeam1.Name = "pBarTeam1";
             this.pBarTeam1.Size = new System.Drawing.Size(125, 23);
@@ -213,7 +198,7 @@
             // 
             // btnJoker1Team1
             // 
-            this.btnJoker1Team1.Location = new System.Drawing.Point(58, 51);
+            this.btnJoker1Team1.Location = new System.Drawing.Point(58, 85);
             this.btnJoker1Team1.Name = "btnJoker1Team1";
             this.btnJoker1Team1.Size = new System.Drawing.Size(125, 50);
             this.btnJoker1Team1.TabIndex = 22;
@@ -221,24 +206,11 @@
             this.btnJoker1Team1.UseVisualStyleBackColor = true;
             this.btnJoker1Team1.Click += new System.EventHandler(this.btnJoker1Team1_Click);
             // 
-            // pBoxMain
-            // 
-            this.pBoxMain.BackColor = System.Drawing.SystemColors.Control;
-            this.pBoxMain.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pBoxMain.BackgroundImage")));
-            this.pBoxMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pBoxMain.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.pBoxMain.Location = new System.Drawing.Point(363, 12);
-            this.pBoxMain.Name = "pBoxMain";
-            this.pBoxMain.Size = new System.Drawing.Size(125, 75);
-            this.pBoxMain.TabIndex = 23;
-            this.pBoxMain.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(851, 419);
-            this.Controls.Add(this.pBoxMain);
             this.Controls.Add(this.btnJoker1Team1);
             this.Controls.Add(this.pBarTeam1);
             this.Controls.Add(this.pBarTeam2);
@@ -250,7 +222,6 @@
             this.Controls.Add(this.lblFrage);
             this.Controls.Add(this.lblTeam2Name);
             this.Controls.Add(this.lblTeam1Name);
-            this.Controls.Add(this.btnAntwortBestätigen);
             this.Controls.Add(this.btnAntwort4);
             this.Controls.Add(this.btnAntwort3);
             this.Controls.Add(this.btnAntwort2);
@@ -261,7 +232,6 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Wer wird Ratekönig?";
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,7 +242,6 @@
         public System.Windows.Forms.Button btnAntwort1;
         public System.Windows.Forms.Button btnAntwort2;
         public System.Windows.Forms.Button btnAntwort4;
-        public System.Windows.Forms.Button btnAntwortBestätigen;
         public System.Windows.Forms.Label lblTeam1Name;
         public System.Windows.Forms.Label lblTeam2Name;
         public System.Windows.Forms.Label lblFrage;
@@ -283,7 +252,6 @@
         public System.Windows.Forms.Button btnPause;
         public System.Windows.Forms.Button btnAntwort3;
         public System.Windows.Forms.Button btnJoker1Team1;
-        public System.Windows.Forms.PictureBox pBoxMain;
         public System.Windows.Forms.ProgressBar pBarTeam2;
         public System.Windows.Forms.ProgressBar pBarTeam1;
     }
