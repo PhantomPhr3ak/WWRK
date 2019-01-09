@@ -220,7 +220,7 @@ namespace WWRK
                 {
                     //Grafik effekt
                     //_form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
-                    Thread.Sleep(1000);
+                    //Thread.Sleep(1000);
                     //_form.btnAntwortBestätigen.BackColor = Color.LightGray;
 
                     //Fragen-Zähler erhöhen
@@ -244,7 +244,7 @@ namespace WWRK
                 {
                     //Grafik effekt
                     //_form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
-                    Thread.Sleep(1000);
+                    //Thread.Sleep(1000);
                     //_form.btnAntwortBestätigen.BackColor = Color.LightGray;
 
                     //Fragen-Zähler erhöhen

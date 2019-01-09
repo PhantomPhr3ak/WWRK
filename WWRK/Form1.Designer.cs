@@ -93,6 +93,7 @@
             this.btnAntwort4.TabIndex = 3;
             this.btnAntwort4.Text = "Antwort 4";
             this.btnAntwort4.UseVisualStyleBackColor = true;
+            this.btnAntwort4.Click += new System.EventHandler(this.btnAntwort4_Click);
             // 
             // lblTeam1Name
             // 
