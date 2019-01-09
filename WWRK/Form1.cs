@@ -101,5 +101,24 @@ namespace WWRK
             MessageBox.Show(@"Zum fortfahren drücken Sie bitte OK.", "",MessageBoxButtons.OK);
             Visible = true;
         }
+
+        private void txtBox_Runden_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtBox_Runden_TextChanged(object sender, EventArgs e)
+        {
+            if(txtBox_Runden.Text != string.Empty)
+                fragenManager.RundenAnzahl = Convert.ToInt32(txtBox_Runden.Text);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            txtBox_Runden.Text = fragenManager.RundenAnzahl.ToString();
+        }
     }
 }

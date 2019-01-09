@@ -37,12 +37,32 @@ namespace WWRK
         private readonly Form1 _form;
 
         private int _i;
+
+        private int _rundenAnzahl = 5;
         
         public FragenManager(Form1 form)
         {
             _form = form;
             
             Neustarten();
+        }
+
+        public int RundenAnzahl
+        {
+            get => _rundenAnzahl;
+            set
+            {
+                if (value <= 0)
+                {
+                    MessageBox.Show(@"Sie müssen mindestens eine Runde spielen.", 
+                        @"Fehler", 
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    throw new ArgumentOutOfRangeException(nameof(value));
+                }
+                _rundenAnzahl = value;
+                Console.WriteLine(value);
+            }
         }
 
         public void AlleFragenLaden()
@@ -151,13 +171,13 @@ namespace WWRK
             {
                 //Aktuelle Frage laden
                 frage = _fragenTeam1[_aktuelleFrageTeam1];
-                _form.lblFrage.Text = frage.frage;
+                _form.txtBox_Frage.Text = frage.frage;
             }
             else if (_aktuellesTeam == 2 && !_team2Ausgeschieden)
             {
                 //Aktuelle Frage laden
                 frage = _fragenTeam2[_aktuelleFrageTeam2];
-                _form.lblFrage.Text = frage.frage;
+                _form.txtBox_Frage.Text = frage.frage;
             }
 
             //Anzeige welches Team dran ist
