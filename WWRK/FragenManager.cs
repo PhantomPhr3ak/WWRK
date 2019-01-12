@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace WWRK
@@ -16,10 +15,13 @@ namespace WWRK
         private readonly OleDbConnection _dbConnection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=Adressen.mdb");
         private OleDbDataAdapter _dbAdapter;
         private DataSet _alleFragenDataSet;
-        
+
+        private int _rundenAnzahl = 5;
+
         //Fragen und Antworten
-        private readonly Frage[] _fragenTeam1 = new Frage[5];
-        private readonly Frage[] _fragenTeam2 = new Frage[5];
+        private Frage[] _fragenTeam1; /* = new Frage[_rundenAnzahl];*/
+
+        private Frage[] _fragenTeam2; /* = new Frage[_rundenAnzahl];*/
         //private Frage[] alleFragen = new Frage[10000];
 
         private readonly List<Frage> _alleFragenList = new List<Frage>(0);
@@ -37,13 +39,14 @@ namespace WWRK
         private readonly Form1 _form;
 
         private int _i;
-
-        private int _rundenAnzahl = 5;
         
         public FragenManager(Form1 form)
         {
             _form = form;
-            
+
+            _fragenTeam1 = new Frage[_rundenAnzahl];
+            _fragenTeam2 = new Frage[_rundenAnzahl];
+
             Neustarten();
         }
 
@@ -100,14 +103,14 @@ namespace WWRK
 
         public void FragenAuswählen()
         {
-            //Wenn genug Fragen für eine Runde vorhanden sind, wähle für jedes Team 5 Fragen zufällig aus
+            //Wenn genug Fragen für eine Runde vorhanden sind, wähle für jedes Team die Anzahl der Fragen zufällig aus. Festgesetzt durch "_rundenAnzahl".
             if (!(_alleFragenList.Count < 10))
             {
                 _i = 0;
 
                 //Team 1
                 int random;
-                while (_i < 5)
+                while (_i < _rundenAnzahl)
                 {
                     //Zufallszahl bestimmen
                     random = _derZufall.Next(0, _alleFragenList.Count);
@@ -125,7 +128,7 @@ namespace WWRK
                 _i = 0;
                 
                 //Team 2
-                while (_i < 5)
+                while (_i < _rundenAnzahl)
                 {
                     //Zufallszahl bestimmen
                     random = _derZufall.Next(0, _alleFragenList.Count);
@@ -346,7 +349,7 @@ namespace WWRK
 
             #endregion
 
-            if (_aktuelleFrageTeam1 == 5 && _aktuelleFrageTeam2 == 5 && _team1Ausgeschieden == false &&
+            if (_aktuelleFrageTeam1 == _rundenAnzahl && _aktuelleFrageTeam2 == _rundenAnzahl && _team1Ausgeschieden == false &&
                 _team2Ausgeschieden == false)
             {
                 //  -   Unentschieden
@@ -358,7 +361,7 @@ namespace WWRK
 
                 Neustarten();
             }
-            else if (_aktuelleFrageTeam1 == 5 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden == false &&
+            else if (_aktuelleFrageTeam1 == _rundenAnzahl && _aktuelleFrageTeam2 < _rundenAnzahl && _team1Ausgeschieden == false &&
                     _team2Ausgeschieden)
             {
                 //  -   Team 1 gewinnt
@@ -370,7 +373,7 @@ namespace WWRK
 
                 Neustarten();
             }
-            else if (_aktuelleFrageTeam1 < 5 && _aktuelleFrageTeam2 == 5 && _team1Ausgeschieden &&
+            else if (_aktuelleFrageTeam1 < _rundenAnzahl && _aktuelleFrageTeam2 == _rundenAnzahl && _team1Ausgeschieden &&
                      _team2Ausgeschieden == false)
             {
                 //  -   Team 2 gewinnt
@@ -382,7 +385,7 @@ namespace WWRK
 
                 Neustarten();
             }
-            else if (_aktuelleFrageTeam1 < 5 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden == false &&
+            else if (_aktuelleFrageTeam1 < _rundenAnzahl && _aktuelleFrageTeam2 < _rundenAnzahl && _team1Ausgeschieden == false &&
                      _team2Ausgeschieden == false)
             {
                 //  -   Spiel geht normal weiter
@@ -391,7 +394,7 @@ namespace WWRK
 
                 NächsteFrage();
             }
-            else if (_aktuelleFrageTeam1 == 5 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden == false &&
+            else if (_aktuelleFrageTeam1 == _rundenAnzahl && _aktuelleFrageTeam2 < _rundenAnzahl && _team1Ausgeschieden == false &&
                      _team2Ausgeschieden == false)
             {
                 //  -   Spiel geht normal weiter !
@@ -400,7 +403,7 @@ namespace WWRK
 
                 NächsteFrage();
             }
-            else if (_aktuelleFrageTeam1 < 5 && _aktuelleFrageTeam2 == 5 && _team1Ausgeschieden == false &&
+            else if (_aktuelleFrageTeam1 < _rundenAnzahl && _aktuelleFrageTeam2 == _rundenAnzahl && _team1Ausgeschieden == false &&
                      _team2Ausgeschieden == false)
             {
                 //  -   Spiel geht normal weiter !
@@ -409,7 +412,7 @@ namespace WWRK
 
                 NächsteFrage();
             }
-            else if (_aktuelleFrageTeam1 < 5 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden &&
+            else if (_aktuelleFrageTeam1 < _rundenAnzahl && _aktuelleFrageTeam2 < _rundenAnzahl && _team1Ausgeschieden &&
                      _team2Ausgeschieden == false)
             {
                 //  -   Team 2 darf weiter spielen
@@ -421,7 +424,7 @@ namespace WWRK
 
                 NächsteFrage();
             }
-            else if (_aktuelleFrageTeam1 < 5 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden == false &&
+            else if (_aktuelleFrageTeam1 < _rundenAnzahl && _aktuelleFrageTeam2 < _rundenAnzahl && _team1Ausgeschieden == false &&
                      _team2Ausgeschieden)
             {
                 //  -   Team 1 darf weiter spielen
@@ -433,7 +436,7 @@ namespace WWRK
 
                 NächsteFrage();
             }
-            else if (_aktuelleFrageTeam1 < _aktuelleFrageTeam2 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden &&
+            else if (_aktuelleFrageTeam1 < _aktuelleFrageTeam2 && _aktuelleFrageTeam2 < _rundenAnzahl && _team1Ausgeschieden &&
                      _team2Ausgeschieden == false)
             {
                 //  -   Team 2 darf weiter spielen
@@ -445,7 +448,7 @@ namespace WWRK
 
                 NächsteFrage();
             }
-            else if (_aktuelleFrageTeam2 < _aktuelleFrageTeam1 && _aktuelleFrageTeam1 < 5 && _team1Ausgeschieden == false &&
+            else if (_aktuelleFrageTeam2 < _aktuelleFrageTeam1 && _aktuelleFrageTeam1 < _rundenAnzahl && _team1Ausgeschieden == false &&
                      _team2Ausgeschieden)
             {
                 //  -   Team 1 darf weiter spielen
@@ -457,7 +460,7 @@ namespace WWRK
 
                 NächsteFrage();
             }
-            else if (_aktuelleFrageTeam2 < _aktuelleFrageTeam1 && _aktuelleFrageTeam1 < 5 && _team1Ausgeschieden &&
+            else if (_aktuelleFrageTeam2 < _aktuelleFrageTeam1 && _aktuelleFrageTeam1 < _rundenAnzahl && _team1Ausgeschieden &&
                      _team2Ausgeschieden)
             {
                 //  -   Team 1 gewinnt
@@ -469,7 +472,7 @@ namespace WWRK
 
                 Neustarten();
             }
-            else if (_aktuelleFrageTeam1 < _aktuelleFrageTeam2 && _aktuelleFrageTeam2 < 5 && _team1Ausgeschieden &&
+            else if (_aktuelleFrageTeam1 < _aktuelleFrageTeam2 && _aktuelleFrageTeam2 < _rundenAnzahl && _team1Ausgeschieden &&
                      _team2Ausgeschieden)
             {
                 //  -   Team 2 gewinnt
@@ -506,7 +509,7 @@ namespace WWRK
                 Neustarten();
             }
 
-            //TODO: Endbedingung einfügen!!! (Nach der 5. Frage; Wenn beide Teams versagen)
+            //TODO: Endbedingung einfügen!!! (Nach der x. Frage (_rundenAnzahl); Wenn beide Teams versagen)
         }
 
         public void Neustarten()
@@ -516,7 +519,7 @@ namespace WWRK
 
             _form.btnJoker1Team1.Enabled = true;
             _form.btnJoker1Team2.Enabled = true;
-            _form.btnJoker2Team2.Enabled = true;
+            _form.btnJoker1Team2.Enabled = true;
             _form.btnJoker2Team2.Enabled = true;
 
             _form.pBarTeam1.Value = 0;
@@ -526,6 +529,12 @@ namespace WWRK
             _aktuelleFrageTeam2 = 0;
 
             _aktuellesTeam = 1;
+
+            _fragenTeam1 = new Frage[_rundenAnzahl];
+            _fragenTeam2 = new Frage[_rundenAnzahl];
+
+            _form.pBarTeam1.Maximum = _rundenAnzahl;
+            _form.pBarTeam2.Maximum = _rundenAnzahl;
 
             AlleFragenLaden();
             FragenAuswählen();
