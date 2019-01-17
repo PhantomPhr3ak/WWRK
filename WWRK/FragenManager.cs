@@ -47,6 +47,8 @@ namespace WWRK
             _fragenTeam1 = new Frage[_rundenAnzahl];
             _fragenTeam2 = new Frage[_rundenAnzahl];
 
+            _form.ActiveControl = null;
+
             Neustarten();
         }
 
@@ -152,6 +154,8 @@ namespace WWRK
             _form.btnAntwort3.Enabled = true;
             _form.btnAntwort4.Enabled = true;
 
+            _form.ActiveControl = null;
+
             //Lokale Variablen
             int[] positionen = {-1,-1,-1,-1};
             string[] antworten = new string[4];
@@ -195,8 +199,6 @@ namespace WWRK
                     _form.lblTeam2Name.ForeColor = Color.Black;
                     break;
             }
-            
-
 
             //Antworten in Array speichern
             antworten[0] = frage.KorrekteAntwort;
@@ -213,51 +215,56 @@ namespace WWRK
         
         public void AntwortBestätigen(string ausgewählteAntwort)
         {
-            if (_aktuellesTeam == 1)
+            switch (_aktuellesTeam)
             {
-                //aktuelle Frage laden
-                Frage frage = _fragenTeam1[_aktuelleFrageTeam1];
-
-                //Überprüfen, ob richtige Antwort ausgewählt wurde
-                if (ausgewählteAntwort == frage.KorrekteAntwort)
+                case 1:
                 {
-                    //Grafik effekt
-                    //_form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
-                    //Thread.Sleep(1000);
-                    //_form.btnAntwortBestätigen.BackColor = Color.LightGray;
+                    //aktuelle Frage laden
+                    Frage frage = _fragenTeam1[_aktuelleFrageTeam1];
 
-                    //Fragen-Zähler erhöhen
-                    _aktuelleFrageTeam1++;
-                    _form.pBarTeam1.Value++;
+                    //Überprüfen, ob richtige Antwort ausgewählt wurde
+                    if (ausgewählteAntwort == frage.KorrekteAntwort)
+                    {
+                        //Grafik effekt
+                        //_form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
+                        //Thread.Sleep(1000);
+                        //_form.btnAntwortBestätigen.BackColor = Color.LightGray;
+
+                        //Fragen-Zähler erhöhen
+                        _aktuelleFrageTeam1++;
+                        _form.pBarTeam1.Value++;
+                    }
+                    else
+                    {
+                        //Team ausscheiden lassen
+                        _team1Ausgeschieden = true;
+                    }
+                    break;
                 }
-                else
+                case 2:
                 {
-                    //Team ausscheiden lassen
-                    _team1Ausgeschieden = true;
-                }
-            }
-            else if (_aktuellesTeam == 2)
-            {
-                //aktuelle Frage laden
-                Frage frage = _fragenTeam2[_aktuelleFrageTeam2];
+                    //aktuelle Frage laden
+                    Frage frage = _fragenTeam2[_aktuelleFrageTeam2];
 
 
-                //Überprüfen, ob richtige Antwort ausgewählt wurde
-                if (ausgewählteAntwort == frage.KorrekteAntwort)
-                {
-                    //Grafik effekt
-                    //_form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
-                    //Thread.Sleep(1000);
-                    //_form.btnAntwortBestätigen.BackColor = Color.LightGray;
+                    //Überprüfen, ob richtige Antwort ausgewählt wurde
+                    if (ausgewählteAntwort == frage.KorrekteAntwort)
+                    {
+                        //Grafik effekt
+                        //_form.btnAntwortBestätigen.BackColor = Color.ForestGreen;
+                        //Thread.Sleep(1000);
+                        //_form.btnAntwortBestätigen.BackColor = Color.LightGray;
 
-                    //Fragen-Zähler erhöhen
-                    _aktuelleFrageTeam2++;
-                    _form.pBarTeam2.Value++;
-                }
-                else
-                {
-                    //Team ausscheiden lassen
-                    _team2Ausgeschieden = true;
+                        //Fragen-Zähler erhöhen
+                        _aktuelleFrageTeam2++;
+                        _form.pBarTeam2.Value++;
+                    }
+                    else
+                    {
+                        //Team ausscheiden lassen
+                        _team2Ausgeschieden = true;
+                    }
+                    break;
                 }
             }
 
@@ -469,8 +476,6 @@ namespace WWRK
                     @"Team 1 hat gewonnen",
                     @"Spiel beendet!",
                     MessageBoxButtons.OK);
-
-                Neustarten();
             }
             else if (_aktuelleFrageTeam1 < _aktuelleFrageTeam2 && _aktuelleFrageTeam2 < _rundenAnzahl && _team1Ausgeschieden &&
                      _team2Ausgeschieden)
@@ -481,8 +486,6 @@ namespace WWRK
                     @"Team 2 hat gewonnen",
                     @"Spiel beendet!",
                     MessageBoxButtons.OK);
-
-                Neustarten();
             }
             else if (_aktuelleFrageTeam1 == _aktuelleFrageTeam2 && _team1Ausgeschieden && _team2Ausgeschieden)
             {
@@ -492,8 +495,6 @@ namespace WWRK
                     @"Unentschieden Beide Teams haben gleich viele Fragen richtig beantwortet.",
                     @"Spiel beendet!",
                     MessageBoxButtons.OK);
-
-                Neustarten();
             }
             else
             {
@@ -506,8 +507,8 @@ namespace WWRK
                         @"Fehler",
                         MessageBoxButtons.OK);
                 }
-                Neustarten();
             }
+            Neustarten();
 
             //TODO: Endbedingung einfügen!!! (Nach der x. Frage (_rundenAnzahl); Wenn beide Teams versagen)
         }

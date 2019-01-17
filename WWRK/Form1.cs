@@ -5,8 +5,8 @@ namespace WWRK
 {
     public partial class Form1 : Form
     {
-        readonly FragenManagerForm _fragenManagerForm = new FragenManagerForm();
-        private FragenManager _fragenManager;
+        //readonly FragenManagerForm _fragenManagerForm = new FragenManagerForm();
+        private readonly FragenManager _fragenManager;
         
         public Form1()
         {

@@ -271,6 +271,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Wer wird Ratekönig?";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
